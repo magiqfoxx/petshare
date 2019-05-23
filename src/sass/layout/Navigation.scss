@@ -1,0 +1,29 @@
+.nav {
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+
+  #logo {
+    color: $primary-color;
+    font-weight: 900;
+    font-size: 1.2rem;
+  }
+  &__ul {
+    display: flex;
+    &__li {
+      display: inline;
+      margin-left: 1rem;
+      color: #40535d;
+      font-size: 0.8rem;
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+  &__img {
+    width: 1rem;
+    cursor: pointer;
+  }
+}

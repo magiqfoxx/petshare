@@ -1,0 +1,21 @@
+//FONTS
+
+html {
+  font-size: 16px;
+
+  @media (min-width: $min-tablet) {
+    font-size: 120%;
+  }
+  @media (min-width: $min-laptop) {
+    font-size: 140%;
+  }
+  @media (min-width: $min-large) {
+    font-size: 160%;
+  }
+  @media (min-width: $min-giant) {
+    font-size: 180%;
+  }
+  @media (min-width: $min-great) {
+    font-size: 200%;
+  }
+}

@@ -1,0 +1,32 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 3px 5px 11px 0px #7d8082;
+  .form__title {
+    margin: 1rem;
+  }
+  padding: 2rem;
+  input {
+    height: 2rem;
+
+    font-size: 0.8rem;
+    padding-left: 0.5rem;
+  }
+  .input__button {
+    height: 2rem;
+    border: none;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+
+    cursor: pointer;
+    &:hover {
+      background-color: #d4305e;
+      color: white;
+      transition: background-color 1s;
+    }
+    &:active {
+      transform: translateX(3px) translateY(3px);
+    }
+  }
+}

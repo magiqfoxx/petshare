@@ -1,0 +1,12 @@
+.landing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__form {
+    margin-right: 10%;
+  }
+  &__image {
+    width: 15vw;
+  }
+}

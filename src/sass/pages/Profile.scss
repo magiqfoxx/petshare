@@ -1,0 +1,34 @@
+.user {
+  &__image {
+    position: relative;
+    margin-bottom: 0.5rem;
+  }
+  &__bio {
+    position: relative;
+    font-size: 0.6rem;
+    line-height: 1rem;
+    margin-top: 0.5rem;
+    padding: 1rem 0.5rem;
+  }
+}
+
+.user-pets {
+  display: flex;
+  flex-direction: column;
+  &__title {
+    text-align: center;
+    color: $primary-color;
+    margin-bottom: 1rem;
+  }
+  .pets {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    @media (min-width: 750px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (min-width: 900px) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+}

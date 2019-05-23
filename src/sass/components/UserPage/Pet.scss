@@ -1,0 +1,29 @@
+.pet {
+  background-color: aliceblue;
+  margin: 0.5rem;
+  font-size: 0.7rem;
+  line-height: 1rem;
+  padding: 1rem;
+  &__bolded {
+    background-color: #5f7d8c;
+    color: aliceblue;
+    margin: 0rem -1rem;
+    padding: 0.5rem 1rem;
+    box-shadow: 1px 1px #5f7d8c;
+  }
+  &__image {
+    width: 100%;
+  }
+  &__name {
+    font-size: 0.8rem;
+    color: aliceblue;
+  }
+  &__species {
+  }
+  &__age {
+  }
+  &__description {
+    margin-top: 1rem;
+    font-size: 0.6rem;
+  }
+}

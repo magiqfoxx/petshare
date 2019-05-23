@@ -1,0 +1,15 @@
+.sign-up {
+  min-width: 15rem;
+  max-width: 80vw;
+  min-height: 20rem;
+  color: white;
+  form {
+    margin-bottom: 1rem;
+    background-color: $primary-color;
+  }
+  .input__button {
+    background-color: $secondary-color;
+    color: $color-dark-gray;
+    margin-top: 1rem;
+  }
+}
