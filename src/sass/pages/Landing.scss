@@ -1,12 +1,14 @@
 .landing {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-
+  margin: 1rem;
   &__form {
-    margin-right: 10%;
   }
   &__image {
     width: 15vw;
+    min-width: 300px;
+    text-align: center;
   }
 }

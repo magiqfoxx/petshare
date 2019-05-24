@@ -1,0 +1,14 @@
+.sign-in {
+  @extend .sign-up;
+  form {
+    background-color: $color-gray;
+  }
+  .form {
+    .input__button {
+      background-color: $primary-color;
+      &:hover {
+        background-color: $color-dark-gray;
+      }
+    }
+  }
+}

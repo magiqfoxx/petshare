@@ -1,4 +1,5 @@
 .user {
+  margin-right: 1rem;
   &__image {
     position: relative;
     margin-bottom: 0.5rem;
@@ -15,15 +16,19 @@
 .user-pets {
   display: flex;
   flex-direction: column;
+  padding: 0rem;
   &__title {
     text-align: center;
-    color: $primary-color;
+    color: whitesmoke;
+    background-color: $primary-color;
     margin-bottom: 1rem;
+    padding: 0.5rem;
   }
   .pets {
     height: 100%;
     display: grid;
     grid-template-columns: 1fr;
+    margin: 0.5rem;
     @media (min-width: 750px) {
       grid-template-columns: 1fr 1fr;
     }

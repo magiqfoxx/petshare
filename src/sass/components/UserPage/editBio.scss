@@ -1,0 +1,23 @@
+.edit-bio {
+  .bio__title {
+    background-color: $primary-color;
+    color: whitesmoke;
+    margin: -2rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+  }
+  .bio-form {
+    position: relative;
+    background-color: $background-color;
+    min-height: 40vh;
+    min-width: 40vw;
+    box-shadow: 3px 5px 11px 0px rgba(23, 23, 23, 0.88);
+    textarea {
+      min-height: 5rem;
+      padding: 0.5rem;
+    }
+    .input__button {
+      margin: 1rem;
+    }
+  }
+}

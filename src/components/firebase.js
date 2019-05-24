@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import firebase from "firebase";
+import firebase from "firebase/app";
 import "firebase/firestore";
+import "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCpcybKbh6nRT0McBzRTBtTcdmJWDrmuAw",
@@ -14,16 +14,6 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-const db = firebase.firestore();
-const [users, setUsers] = useState([{ name: "user1", posts: 5 }]);
-useEffect(() => {
-  //onSnapshot => when data changes
-  //returns unsubscribe
-  return db.collection("users").onSnapshot(snapshot => {
-    const docs = [];
-    snapshot.forEach(doc => {
-      docs.push({ ...doc.data(), id: doc.id });
-    });
-    setUsers(docs);
-  });
-}, []);
+export const firestore = firebase.firestore();
+
+export default firebase;

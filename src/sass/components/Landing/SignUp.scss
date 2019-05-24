@@ -12,4 +12,15 @@
     color: $color-dark-gray;
     margin-top: 1rem;
   }
+  .form__text {
+    color: $color-dark-gray;
+    text-decoration: underline;
+    font-size: 0.8rem;
+    text-align: center;
+    cursor: pointer;
+    margin: 1rem;
+    &:hover {
+      color: $secondary-color;
+    }
+  }
 }

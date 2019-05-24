@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import firebase from "../firebase2";
+import firebase, { firestore } from "../firebase";
 
 const SignUp = props => {
-  const [user, setUser] = useState(null);
+  //const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,7 +18,17 @@ const SignUp = props => {
         alert(errorMessage);
       });
     if (response) {
-      setUser(response.user);
+      console.log(response);
+      //save user in the database
+      const newUser = {
+        //only for email sign up!
+        email: response.user.email,
+        uid: response.user.uid
+      };
+      firestore
+        .collection("users")
+        .doc(newUser.uid)
+        .set(newUser, { merge: true });
     }
   };
 
@@ -44,7 +54,9 @@ const SignUp = props => {
           placeholder="********"
         />
         <input className="input__button" type="submit" value="submit" />
-        <p onClick={() => props.signIn()}>Sign in instead</p>
+        <p className="form__text" onClick={() => props.signIn()}>
+          Sign in instead
+        </p>
       </form>
     </div>
   );

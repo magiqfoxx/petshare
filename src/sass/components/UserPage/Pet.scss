@@ -5,11 +5,11 @@
   line-height: 1rem;
   padding: 1rem;
   &__bolded {
-    background-color: #5f7d8c;
-    color: aliceblue;
+    background-color: $primary-color;
+    color: whitesmoke;
     margin: 0rem -1rem;
     padding: 0.5rem 1rem;
-    box-shadow: 1px 1px #5f7d8c;
+    box-shadow: 1px 1px $primary-color;
   }
   &__image {
     width: 100%;

@@ -11,19 +11,5 @@
 }
 .pet-slate {
   box-shadow: 3px 3px 5px #d6d5d5;
-  background-color: #607d8b12;
-}
-.edit {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 10%;
-  border: 1px solid transparent;
-  cursor: pointer;
-  &:hover {
-    border: 1px outset gray;
-  }
-  &:active {
-    border: 1px inset gray;
-  }
+  background-color: $background-color;
 }

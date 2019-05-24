@@ -1,0 +1,24 @@
+.edit {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 1rem;
+  border: 1px solid transparent;
+  background-color: transparent;
+  cursor: pointer;
+  &:hover {
+    border: 1px outset gray;
+  }
+  &:active {
+    border: 1px inset gray;
+  }
+}
+.quit {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 2rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

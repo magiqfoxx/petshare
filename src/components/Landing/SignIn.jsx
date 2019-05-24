@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import firebase from "../firebase2";
+import firebase from "../firebase";
 
 const SignIn = () => {
-  const [user, setUser] = useState(null);
+  //const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,11 +19,11 @@ const SignIn = () => {
       });
     console.log(response);
     if (response) {
-      setUser(response.user);
+      //setUser(response.user);
     }
   };
   return (
-    <div className="sign-up">
+    <div className="sign-in">
       <form onSubmit={handleSignIn} className="form">
         <h2 className="form__title">Sign in</h2>
         <label htmlFor="email">Email:</label>
