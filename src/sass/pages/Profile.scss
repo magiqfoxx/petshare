@@ -11,6 +11,10 @@
     margin-top: 0.5rem;
     padding: 1rem 0.5rem;
   }
+  &__name {
+    font-size: 0.8rem;
+    color: $primary-color;
+  }
 }
 
 .user-pets {

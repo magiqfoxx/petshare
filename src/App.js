@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import firebase from "./components/firebase";
+import firebase, { firestore } from "./components/firebase";
 
 import Navigation from "./components/Navigation";
 import Landing from "./components/Landing/Landing";
@@ -14,38 +14,59 @@ import Footer from "./components/Footer";
 export const UserContext = React.createContext();
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [loggedUser, setLoggedUser] = useState(null);
+  const [userPets, setUserPets] = useState([]);
 
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        var displayName = user.displayName;
-        var email = user.email;
-        var emailVerified = user.emailVerified;
-        var photoURL = user.photoURL;
-        var isAnonymous = user.isAnonymous;
-        var uid = user.uid;
-        var providerData = user.providerData;
-        // ...
-        setUser({
+        //grab all the user data from authorisation
+        const displayName = user.displayName;
+        const email = user.email;
+        const emailVerified = user.emailVerified;
+        const photoURL = user.photoURL;
+        const isAnonymous = user.isAnonymous;
+        const uid = user.uid;
+        const providerData = user.providerData;
+
+        //sets data when user logs in
+        setLoggedUser({
           displayName,
           email,
-          emailVerified,
-          photoURL,
-          isAnonymous,
-          uid,
-          providerData
+          uid
+        });
+        const userRef = firestore.collection("users").doc(uid);
+
+        //grab all the user data from the database
+        //and listen for changes (snapshot)
+        userRef.onSnapshot(doc => {
+          const dataBase = doc.data();
+          //updates database data
+          setLoggedUser(state => {
+            return { ...state }, dataBase;
+          });
+        });
+
+        //grab all pets for this user
+        //and listen for changes - snapshot
+        userRef.collection("pets").onSnapshot(pets => {
+          const allPets = [];
+          pets.forEach(pet => {
+            allPets.push({ id: pet.id, ...pet.data() });
+          });
+          setLoggedUser(state => {
+            return { ...state, allPets };
+          });
         });
       } else {
         // User is signed out.
-        // ...
-        setUser(null);
+        setLoggedUser(null);
       }
     });
   }, []);
   return (
-    <UserContext.Provider value={user}>
+    <UserContext.Provider value={loggedUser}>
       <div className="app">
         <Navigation />
         <Route path="/" exact component={Landing} />

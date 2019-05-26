@@ -14,7 +14,6 @@ import profileImg from "../img/icons/profile.svg";
 import settingsImg from "../img/icons/settings.svg";
 import logoutImg from "../img/icons/logout.svg";
 import loginImg from "../img/icons/iconfinder_login_4115234.svg";
-import { timeout } from "q";
 import { setTimeout } from "timers";
 
 const Navigation = props => {

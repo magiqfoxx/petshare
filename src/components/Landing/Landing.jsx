@@ -9,7 +9,6 @@ const Landing = () => {
   const user = useContext(UserContext);
   //const [user, setUser] = useState(null);
   const [signIn, setSignIn] = useState(false);
-  console.log(user);
   return (
     <main className="landing">
       {user ? (
@@ -20,7 +19,10 @@ const Landing = () => {
             <SignUp signIn={() => setSignIn(true)} />
           </div>
           <div className="landing__image">
-            <img src="../../img/iconfinder_cat_cage_182517.png" />
+            <img
+              src="../../img/iconfinder_cat_cage_182517.png"
+              alt="cat in a bird cage"
+            />
           </div>
           {signIn ? <SignIn /> : null}
         </React.Fragment>
