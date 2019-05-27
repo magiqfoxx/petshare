@@ -92,6 +92,9 @@
     min-height: 40vh;
     min-width: 40vw;
     box-shadow: 3px 5px 11px 0px rgba(23, 23, 23, 0.88);
+    &__error {
+      width: 100%;
+    }
     &__text-input {
       border-radius: 0.2rem;
       border: 1px solid #d8ccbb;
@@ -123,6 +126,22 @@
       margin: 1rem;
       background-color: $primary-color;
       color: white;
+    }
+  }
+}
+
+.form--editPet {
+  display: block;
+  .form {
+    &__title {
+    }
+    &__img {
+      width: 5rem;
+    }
+    &__input {
+      width: 5rem;
+    }
+    &__label {
     }
   }
 }

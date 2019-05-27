@@ -1,22 +1,27 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../../App";
-import { storage } from "../firebase.js";
 
 import EditBio from "./EditBio";
 import EditPicture from "./EditPicture";
+import EditLocation from "./EditLocation";
 import EditNewPet from "./EditNewPet";
+import EditPet from "./EditPet";
 import Pet from "./Pet";
 
 import userImg from "../../img/icons/profile.svg";
 import editImg from "../../img/icons/edit.svg";
 import addImg from "../../img/icons/add.svg";
+import locationImg from "../../img/icons/placeholder.svg";
 
 const Profile = props => {
-  const [showEditBio, setEditBio] = useState(false);
-  const [showEditPicture, setEditPicture] = useState(false);
-  const [showEditNewPet, setEditNewPet] = useState(false);
+  const [showEditBio, setShowEditBio] = useState(false);
+  const [showEditPicture, setShowEditPicture] = useState(false);
+  const [showEditNewPet, setShowEditNewPet] = useState(false);
+  const [showEditLocation, setShowEditLocation] = useState(false);
+  const [showEditPet, setShowEditPet] = useState(false);
+
   const user = useContext(UserContext);
-  console.log(user);
+
   const renderBio = () => {
     return (
       user.bio ||
@@ -24,7 +29,10 @@ const Profile = props => {
 ― Maya Angelou`
     );
   };
-  const pictureSrc = () => {
+  const renderLocation = () => {
+    return user.location || `Add location`;
+  };
+  const renderPictureSrc = () => {
     return user.img || userImg;
   };
   const renderPets = () => {
@@ -43,18 +51,23 @@ const Profile = props => {
   const PetComponent = pet => {
     return (
       <Pet
-        key={pet.petId}
+        edit={(e, petObj) => {
+          setShowEditPet(petObj);
+        }}
+        editable={true}
+        key={pet.id}
         img={pet.img}
         name={pet.name}
         species={pet.species}
         age={pet.age}
         description={pet.description}
+        id={pet.id}
       />
     );
   };
 
   const addANewPet = (
-    <div className="pet pet-slate" onClick={() => setEditNewPet(true)}>
+    <div className="pet pet-slate" onClick={() => setShowEditNewPet(true)}>
       <img className="pet__image add-pet" src={addImg} alt="add" />
       <span>Add a new pet!</span>
     </div>
@@ -65,14 +78,22 @@ const Profile = props => {
       <main className="profile">
         <div className="user">
           <div className="user__image small-slate">
-            <img src={pictureSrc()} alt="user" />
-            <button className="edit" onClick={() => setEditPicture(true)}>
+            <img src={renderPictureSrc()} alt="user" />
+            <button className="edit" onClick={() => setShowEditPicture(true)}>
               <img className="edit__img" src={editImg} alt="edit" />
             </button>
             <h3 className="user__name">{user.name}</h3>
+
+            <span className="user__location">{renderLocation()}</span>
+            <img
+              className="icon"
+              src={locationImg}
+              alt="location"
+              onClick={() => setShowEditLocation(true)}
+            />
           </div>
           <div className="user__bio small-slate">
-            <button className="edit" onClick={() => setEditBio(true)}>
+            <button className="edit" onClick={() => setShowEditBio(true)}>
               <img className="edit__button" src={editImg} alt="edit" />
             </button>
             <p>{renderBio()}</p>
@@ -82,12 +103,18 @@ const Profile = props => {
           <h2 className="user-pets__title">Pets</h2>
           <div className="pets">{renderPets()}</div>
         </div>
-        {showEditBio ? <EditBio close={() => setEditBio(false)} /> : null}
+        {showEditBio ? <EditBio close={() => setShowEditBio(false)} /> : null}
         {showEditPicture ? (
-          <EditPicture close={() => setEditPicture(false)} />
+          <EditPicture close={() => setShowEditPicture(false)} />
+        ) : null}
+        {showEditLocation ? (
+          <EditLocation close={() => setShowEditLocation(false)} />
         ) : null}
         {showEditNewPet ? (
-          <EditNewPet close={() => setEditNewPet(false)} />
+          <EditNewPet close={() => setShowEditNewPet(false)} />
+        ) : null}
+        {showEditPet ? (
+          <EditPet close={() => setShowEditPet(false)} pet={showEditPet} />
         ) : null}
       </main>
     );

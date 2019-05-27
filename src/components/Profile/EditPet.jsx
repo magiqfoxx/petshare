@@ -64,17 +64,25 @@ class EditNewPet extends Component {
           <div className="background" onClick={() => this.props.close()}>
             <div className="edit__form">
               <form
-                className="form"
+                className="form form--editPet"
                 onSubmit={event => this.handleSubmit(event, context)}
                 onClick={event => event.stopPropagation()}
               >
                 <button className="quit" onClick={() => this.props.close()}>
                   <img src={quitImg} alt="quit" />
                 </button>
-                <h1 className="form__title">Add a new pet</h1>
-                <label htmlFor="name">Name:</label>
+                <h1 className="form__title">Edit your pet</h1>
+                <img
+                  className="form__img"
+                  src={this.props.pet.img}
+                  alt="your pet"
+                />
+                <input className="form__input" type="image" src="" alt="" />
+                <label className="form__label" htmlFor="name">
+                  Name:
+                </label>
                 <input
-                  className="form__text-input"
+                  className="form__input form__text-input"
                   type="text"
                   name="name"
                   id="name"
@@ -82,9 +90,11 @@ class EditNewPet extends Component {
                   value={this.state.name}
                   required
                 />
-                <label htmlFor="species">Species:</label>
+                <label className="form__label" htmlFor="species">
+                  Species:
+                </label>
                 <input
-                  className="form__text-input"
+                  className="form__input form__text-input"
                   type="text"
                   name="species"
                   id="species"
@@ -92,9 +102,11 @@ class EditNewPet extends Component {
                   value={this.state.species}
                   required
                 />
-                <label htmlFor="age">Age:</label>
+                <label className="form__label" htmlFor="age">
+                  Age:
+                </label>
                 <input
-                  className="form__text-input"
+                  className="form__input form__text-input"
                   type="number"
                   name="age"
                   id="age"
@@ -102,7 +114,9 @@ class EditNewPet extends Component {
                   value={this.state.age}
                   required
                 />
-                <label htmlFor="description">Description:</label>
+                <label className="form__label" htmlFor="description">
+                  Description:
+                </label>
                 <textarea
                   className="form__textarea"
                   name="description"

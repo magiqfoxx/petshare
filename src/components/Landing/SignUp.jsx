@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import firebase, { firestore } from "../firebase";
 
-import PasswordsNotMatching from "./PasswordsNotMatching";
+import FormError from "./FormError";
 
 const SignUp = props => {
   const [name, setName] = useState("");
@@ -75,7 +75,9 @@ const SignUp = props => {
           minLength="6"
           placeholder="********"
         />
-        {password !== password2 ? <PasswordsNotMatching /> : null}
+        {password !== password2 ? (
+          <FormError message="Passwords don't match" />
+        ) : null}
 
         <input className="input__button" type="submit" value="submit" />
         <p className="form__text" onClick={() => props.signIn()}>

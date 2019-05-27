@@ -1,0 +1,35 @@
+.settings {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
+
+  &__slate {
+    min-width: 30rem;
+    max-width: 80vw;
+    min-height: 20rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .slate__title {
+    background-color: $primary-color;
+    color: white;
+    margin: -0.5rem;
+  }
+  .slate__list {
+    margin-top: 0.5rem;
+    margin: auto auto;
+    line-height: 3rem;
+    text-align: left;
+    &__item {
+      list-style: none;
+      .list__img {
+        width: 1.5rem;
+        vertical-align: middle;
+        margin-right: 1rem;
+      }
+    }
+  }
+}

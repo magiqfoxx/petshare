@@ -1,9 +1,10 @@
 .edit {
   position: absolute;
-  top: 5px;
+  bottom: 5px;
   right: 5px;
-  width: 1rem;
-  background-color: transparent;
+  width: 1.4rem;
+  background-color: $small-slate-color;
+  padding: 0.2rem;
   cursor: pointer;
   border: none;
   border-radius: 0.2rem;
@@ -21,5 +22,11 @@
   width: 2rem;
   background-color: transparent;
   border: none;
+  cursor: pointer;
+}
+.icon--button {
+  background-color: transparent;
+  border: none;
+  display: inline;
   cursor: pointer;
 }

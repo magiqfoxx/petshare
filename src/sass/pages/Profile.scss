@@ -3,13 +3,25 @@
   &__image {
     position: relative;
     margin-bottom: 0.5rem;
+    padding: 1rem 0.5rem;
+    img {
+      width: 100%;
+    }
+    .icon {
+      width: 1rem;
+      cursor: pointer;
+    }
+    .user__location {
+      font-size: 0.6rem;
+      font-weight: 200;
+    }
   }
   &__bio {
     position: relative;
     font-size: 0.6rem;
     line-height: 1rem;
     margin-top: 0.5rem;
-    padding: 1rem 0.5rem;
+    padding: 1rem 0.5rem 1.5rem 0.5rem;
   }
   &__name {
     font-size: 0.8rem;

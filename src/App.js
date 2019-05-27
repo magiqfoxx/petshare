@@ -15,7 +15,6 @@ export const UserContext = React.createContext();
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(null);
-  const [userPets, setUserPets] = useState([]);
 
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(function(user) {
@@ -24,11 +23,11 @@ function App() {
         //grab all the user data from authorisation
         const displayName = user.displayName;
         const email = user.email;
-        const emailVerified = user.emailVerified;
-        const photoURL = user.photoURL;
-        const isAnonymous = user.isAnonymous;
+        //const emailVerified = user.emailVerified;
+        //const photoURL = user.photoURL;
+        //const isAnonymous = user.isAnonymous;
         const uid = user.uid;
-        const providerData = user.providerData;
+        //const providerData = user.providerData;
 
         //sets data when user logs in
         setLoggedUser({

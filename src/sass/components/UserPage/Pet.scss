@@ -10,9 +10,16 @@
     margin: 0rem -1rem;
     padding: 0.5rem 1rem;
     box-shadow: 1px 1px $primary-color;
+    position: relative;
+    .edit {
+      background-color: transparent;
+      &:hover {
+        background-color: whitesmoke;
+      }
+    }
   }
   &__image {
-    width: 100%;
+    height: 10rem;
   }
   &__name {
     font-size: 0.8rem;

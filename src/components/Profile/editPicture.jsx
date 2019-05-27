@@ -1,34 +1,32 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../../App";
-import firebase, { firestore, storage } from "../firebase";
 
+import FormError from "../Landing/FormError";
+import { uploadUserImg } from "../utilities/utilities.js";
 import quitImg from "../../img/icons/cancel.svg";
 
 const EditPicture = props => {
   const [image, setImage] = useState("");
+  const [imageTooLarge, setImageTooLarge] = useState(false);
   const user = useContext(UserContext);
 
   const handleSubmit = async event => {
     //OLD FILE WILL NOT BE OVERWRITTEN IF IT WAS A DIFFERENT EXTENSION
     event.preventDefault();
-    const fileType = image[0].name.split(".").pop();
-    const storageRef = storage.ref(`images/users/${user.uid}.${fileType}`);
-    //adds the picture at the specified reference/place
-    await storageRef.put(image[0]);
-    const pictureImg = await storageRef.getDownloadURL();
+    if (image) {
+      uploadUserImg(user.uid, image);
 
-    const userRef = firestore.collection("users").doc(user.uid);
-    //adds a reference to the picture in user doc
-    await userRef.set(
-      {
-        img: pictureImg
-      },
-      { merge: true }
-    );
-    props.close();
+      props.close();
+    }
   };
   const handleChange = event => {
-    setImage(event.target.files);
+    if (event.target.files) {
+      if (event.target.files[0].size > 2000000) {
+        setImageTooLarge(true);
+      } else {
+        setImage(event.target.files);
+      }
+    }
   };
   return (
     <div className="background" onClick={() => props.close()}>
@@ -51,6 +49,7 @@ const EditPicture = props => {
             onChange={handleChange}
             required
           />
+          {imageTooLarge ? <FormError message="Image is too large" /> : null}
           <p className="form__text">Please, choose a jpg or png file.</p>
           <input className="input__button" type="submit" value="submit" />
         </form>
