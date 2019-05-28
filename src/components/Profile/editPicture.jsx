@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { UserContext } from "../../App";
 
 import FormError from "../Landing/FormError";
-import { uploadUserImg } from "../utilities/utilities.js";
+import { uploadUserImg } from "../utilities/addToStorage";
 import quitImg from "../../img/icons/cancel.svg";
 
 const EditPicture = props => {
@@ -14,7 +14,11 @@ const EditPicture = props => {
     //OLD FILE WILL NOT BE OVERWRITTEN IF IT WAS A DIFFERENT EXTENSION
     event.preventDefault();
     if (image) {
-      uploadUserImg(user.uid, image);
+      try {
+        uploadUserImg(user.uid, image);
+      } catch (error) {
+        console.log(error);
+      }
 
       props.close();
     }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import firebase, { firestore } from "../firebase";
 
 import FormError from "./FormError";
+import { addNewUserToDatabase } from "../utilities/addToDatabase";
 
 const SignUp = props => {
   const [name, setName] = useState("");
@@ -16,23 +17,18 @@ const SignUp = props => {
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .catch(function(error) {
-          // Handle Errors here.
           var errorCode = error.code;
           var errorMessage = error.message;
           alert(errorMessage, errorCode);
         });
       if (response) {
-        //save user in the database
         const newUser = {
           //only for email sign up!
           name: name,
           email: response.user.email,
           uid: response.user.uid
         };
-        firestore
-          .collection("users")
-          .doc(newUser.uid)
-          .set(newUser, { merge: true });
+        addNewUserToDatabase(newUser);
       }
     }
   };

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../../App";
-import { firestore } from "../firebase";
-//ABSTRACT EDIT COMPONENTS?
+
+import { updateUserInDataBase } from "../utilities/updateDatabase";
 import quitImg from "../../img/icons/cancel.svg";
 
 const EditLocation = props => {
@@ -11,8 +11,11 @@ const EditLocation = props => {
   const handleSubmit = async event => {
     event.preventDefault();
 
-    const userRef = firestore.collection("users").doc(user.uid);
-    userRef.update({ location });
+    try {
+      updateUserInDataBase(user.uid, { location });
+    } catch (error) {
+      console.log(error);
+    }
     props.close();
   };
   const handleChange = event => {

@@ -51,6 +51,7 @@ const Profile = props => {
   const PetComponent = pet => {
     return (
       <Pet
+        //????????????????????
         edit={(e, petObj) => {
           setShowEditPet(petObj);
         }}
@@ -61,7 +62,7 @@ const Profile = props => {
         species={pet.species}
         age={pet.age}
         description={pet.description}
-        id={pet.id}
+        uid={pet.id}
       />
     );
   };

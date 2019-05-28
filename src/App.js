@@ -10,6 +10,7 @@ import Search from "./components/Search/Search";
 import Profile from "./components/Profile/Profile";
 import Settings from "./components/Settings";
 import Footer from "./components/Footer";
+import { addNewUserToDatabase } from "./components/utilities/addToDatabase";
 
 export const UserContext = React.createContext();
 
@@ -36,12 +37,11 @@ function App() {
           uid
         });
         const userRef = firestore.collection("users").doc(uid);
-
         //grab all the user data from the database
         //and listen for changes (snapshot)
         userRef.onSnapshot(doc => {
-          const dataBase = doc.data();
           //updates database data
+          const dataBase = doc.data();
           setLoggedUser(state => {
             return { ...state }, dataBase;
           });

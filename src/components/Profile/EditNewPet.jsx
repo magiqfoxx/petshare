@@ -2,11 +2,8 @@ import React, { Component } from "react";
 import { UserContext } from "../../App";
 
 import FormError from "../Landing/FormError";
-import {
-  uploadPetImg,
-  addNewPet,
-  addToPetCollection
-} from "../utilities/utilities.js";
+import { addNewPet } from "../utilities/utilities.js";
+
 import quitImg from "../../img/icons/cancel.svg";
 import pictureImg from "../../img/icons/gallery.svg";
 
@@ -22,27 +19,24 @@ class EditNewPet extends Component {
 
   handleSubmit = async (event, user) => {
     event.preventDefault();
-    if (this.state.image) {
-      const newPet = {
-        name: this.state.name,
-        species: this.state.species,
-        age: this.state.age,
-        description: this.state.description
-      };
+    //nothing should be added if an error is thrown
+    try {
+      //validate that an image was selected
+      if (this.state.image) {
+        const newPet = {
+          name: this.state.name,
+          species: this.state.species,
+          age: this.state.age,
+          description: this.state.description
+        };
 
-      const petRef = await addNewPet(user, newPet);
-      const petCollectionRef = await addToPetCollection(newPet);
-      await uploadPetImg(
-        petRef.id,
-        this.state.image,
-        user.uid,
-        petCollectionRef.id
-      );
+        await addNewPet(user.uid, newPet, this.state.image);
 
-      this.props.close();
+        this.props.close();
+      }
+    } catch (error) {
+      console.log(error);
     }
-
-    //.update to change edit the doc
   };
 
   handleChange = event => {

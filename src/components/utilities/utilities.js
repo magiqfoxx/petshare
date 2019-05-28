@@ -1,5 +1,57 @@
-import { firestore, storage } from "../firebase";
+import { uploadPetImg } from "./addToStorage";
+import { addNewPetToDataBase, addNewPetToCollection } from "./addToDatabase";
+import { updatePetInDataBase } from "./updateDatabase";
+import {
+  removeUserFromDataBase,
+  removePetFromDataBase,
+  removePetFromCollection
+} from "./removeFromDatabase";
+import { removeUserImg, removePetImg } from "./removeFromStorage";
+/*export const addNewUser = () => {
+  addUserToDataBase;
+  uploadUserImg; //also adds a ref to the img in DB
+};*/
+export const dataChanged = (oldPet, newPet) => {
+  if (
+    oldPet.name !== newPet.name ||
+    oldPet.species !== newPet.species ||
+    oldPet.age !== newPet.age ||
+    oldPet.description !== newPet.description
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
+export const deleteUser = userUID => {
+  //for each pet in userUID removePetImg(petUID) && removePetFRomCollection(petUID) ?
+
+  removeUserFromDataBase(userUID);
+  removeUserImg(userUID);
+  //REMOVE USER'S PETS FROM COLLECTION????
+  //AND THE PET IMAGES
+};
+
+//  PETS    //
+export const addNewPet = async (userUID, newPet, image) => {
+  const petRef = await addNewPetToDataBase(userUID, newPet);
+  const petUID = petRef.id;
+  addNewPetToCollection(newPet, petUID);
+  uploadPetImg(userUID, petUID, image); //also adds refs to DB
+};
+export const updatePetData = (userUID, petUID, newPet) => {
+  updatePetInDataBase(userUID, newPet);
+  addNewPetToCollection(newPet, petUID);
+};
+
+export const removePet = (userUID, petUID) => {
+  removePetFromDataBase(userUID, petUID);
+  removePetFromCollection(petUID);
+  removePetImg(userUID, petUID);
+};
+
+/*
 export const uploadUserImg = async (userUID, image) => {
   const fileType = getExtension(image);
   const storageRef = storage.ref(`images/users/${userUID}.${fileType}`);
@@ -22,7 +74,9 @@ export const uploadPetImg = async (
 ) => {
   //CHANGE THE FILING TO USERUID/USERUID.IMG AND USERUID/PETS/PETUID.IMG ?
   const fileType = getExtension(image);
-  const storageRef = storage.ref(`images/users/pets/${petUID}.${fileType}`);
+  const storageRef = storage.ref(
+    `images/users/userUID/pets/${petUID}.${fileType}`
+  );
   const pictureRef = await uploadImg(storageRef, image);
 
   const petRef = firestore
@@ -67,7 +121,21 @@ export const addNewPet = async (user, newPet) => {
   const userRef = firestore.collection("users").doc(user.uid);
   return await userRef.collection("pets").add(newPet);
 };
+export const updatePet = async (user, newPet, petUID) => {
+  const userRef = firestore.collection("users").doc(user.uid);
+  return await userRef
+    .collection("pets")
+    .doc(petUID)
+    .set(...newPet);
+};
 
 export const addToPetCollection = async newPet => {
   return await firestore.collection("pets").add(newPet);
 };
+export const updatePetCollection = async (newPet, petUID) => {
+  return await firestore
+    .collection("pets")
+    .doc(petUID)
+    .set(newPet);
+};
+*/
