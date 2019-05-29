@@ -3,6 +3,7 @@ import { UserContext } from "../../App";
 
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
+import WhySignUp from "./WhySignUp";
 import Dashboard from "../Dashboard/Dashboard";
 
 const Landing = () => {
@@ -18,13 +19,8 @@ const Landing = () => {
           <div className="landing__form">
             <SignUp signIn={() => setSignIn(true)} />
           </div>
-          <div className="landing__image">
-            <img
-              src="../../img/iconfinder_cat_cage_182517.png"
-              alt="cat in a bird cage"
-            />
-          </div>
-          {signIn ? <SignIn /> : null}
+
+          {signIn ? <SignIn /> : <WhySignUp />}
         </React.Fragment>
       )}
     </main>

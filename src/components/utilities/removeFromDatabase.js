@@ -6,6 +6,19 @@ export const removeUserFromDataBase = userUID => {
     .doc(userUID)
     .delete();
 };
+export const removeAllOfUsersPetsFromCollection = userUID => {
+  firestore
+    .collection("users")
+    .doc(userUID)
+    .collection("pets")
+    .get()
+    .then(pets => {
+      pets.forEach(pet => {
+        removePetFromCollection(pet.id);
+      });
+    })
+    .catch(error => console.log(error));
+};
 
 //  PETS  //
 export const removePetFromDataBase = (userUID, petUID) => {

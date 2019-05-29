@@ -32,6 +32,20 @@
   border: none;
   cursor: pointer;
 }
+.settings__button {
+  cursor: pointer;
+  border: 2px solid $primary-color;
+  border-radius: 0.2rem;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  background-color: #fff7ed;
+  font-size: 1rem;
+  &:hover {
+    background-color: $primary-color;
+  }
+  &:active {
+  }
+}
 .icon--button {
   background-color: transparent;
   border: none;

@@ -1,0 +1,22 @@
+.landing__whySignUp {
+  min-width: 15rem;
+  max-width: 80vw;
+  min-height: 20rem;
+  color: black;
+  background: url("../img/iconfinder_cat_cage_182517.png"),
+    linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
+
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  margin: 0rem 2rem;
+  line-height: 3rem;
+  .whySignUp {
+    &__list {
+      &-item {
+        list-style: none;
+      }
+    }
+  }
+}

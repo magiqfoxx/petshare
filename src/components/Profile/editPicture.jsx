@@ -28,7 +28,7 @@ const EditPicture = props => {
       if (event.target.files[0].size > 2000000) {
         setImageTooLarge(true);
       } else {
-        setImage(event.target.files);
+        setImage(event.target.files[0]);
       }
     }
   };

@@ -9,6 +9,11 @@
   .form__title {
     margin: 1rem;
   }
+  .form__label {
+    color: black;
+    font-size: 1rem;
+    font-weight: 300;
+  }
   &__error {
     position: relative;
     padding: 1rem;
@@ -31,6 +36,7 @@
       font-weight: 500;
       vertical-align: middle;
     }
+
     &__arrow {
       position: absolute;
       top: -0.5rem;
@@ -82,7 +88,7 @@
     color: whitesmoke;
     margin: -2rem;
     margin-bottom: 2rem;
-    padding: 1rem;
+    padding: 1rem 2rem;
   }
   .form {
     position: relative;

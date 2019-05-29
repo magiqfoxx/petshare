@@ -3,14 +3,16 @@ import { addNewPetToDataBase, addNewPetToCollection } from "./addToDatabase";
 import { updatePetInDataBase } from "./updateDatabase";
 import {
   removeUserFromDataBase,
+  removeAllOfUsersPetsFromCollection,
   removePetFromDataBase,
   removePetFromCollection
 } from "./removeFromDatabase";
-import { removeUserImg, removePetImg } from "./removeFromStorage";
-/*export const addNewUser = () => {
-  addUserToDataBase;
-  uploadUserImg; //also adds a ref to the img in DB
-};*/
+import {
+  removeUserImg,
+  removeUserStorage,
+  removePetImg
+} from "./removeFromStorage";
+
 export const dataChanged = (oldPet, newPet) => {
   if (
     oldPet.name !== newPet.name ||
@@ -25,12 +27,14 @@ export const dataChanged = (oldPet, newPet) => {
 };
 
 export const deleteUser = userUID => {
-  //for each pet in userUID removePetImg(petUID) && removePetFRomCollection(petUID) ?
+  //remove user's pets from collection of all pets
+  removeAllOfUsersPetsFromCollection(userUID);
 
   removeUserFromDataBase(userUID);
   removeUserImg(userUID);
-  //REMOVE USER'S PETS FROM COLLECTION????
-  //AND THE PET IMAGES
+  removeUserStorage(userUID);
+
+  //  REMOVE FROM AUTHORIZED ACCOUNTS!!!
 };
 
 //  PETS    //

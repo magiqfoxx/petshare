@@ -9,6 +9,14 @@ export const removeUserImg = userUID => {
     console.log(error);
   }
 };
+export const removeUserStorage = userUID => {
+  //remove the whole folder
+  try {
+    storage.ref(`images/users/${userUID}`).delete();
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 //    PETS    //
 export const removePetImg = (userUID, petUID) => {

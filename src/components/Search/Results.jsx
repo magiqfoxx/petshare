@@ -15,7 +15,6 @@ const Results = () => {
     return petsRef.onSnapshot(petsInDB => {
       const allPets = [];
       petsInDB.forEach(pet => {
-        console.log(pet.data());
         allPets.push({ id: pet.id, ...pet.data() });
       });
       setPets(state => {

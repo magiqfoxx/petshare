@@ -23,6 +23,8 @@
     margin: auto auto;
     line-height: 3rem;
     text-align: left;
+    display: flex;
+    flex-direction: column;
     &__item {
       list-style: none;
       .list__img {

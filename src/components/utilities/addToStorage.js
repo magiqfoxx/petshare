@@ -28,7 +28,6 @@ export const uploadUserImg = async (userUID, image) => {
 };
 
 export const uploadPetImg = async (userUID, petUID, image) => {
-  //CHANGE THE FILING TO USERUID/USERUID.IMG AND USERUID/PETS/PETUID.IMG ?
   const fileType = getExtension(image);
   const storageRef = storage.ref(
     `images/users/${userUID}/pets/${petUID}.${fileType}`

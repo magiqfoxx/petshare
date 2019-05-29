@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import firebase, { firestore } from "../firebase";
+import firebase from "../firebase";
 
 import FormError from "./FormError";
 import { addNewUserToDatabase } from "../utilities/addToDatabase";
@@ -29,6 +29,15 @@ const SignUp = props => {
           uid: response.user.uid
         };
         addNewUserToDatabase(newUser);
+        const user = firebase.auth().currentUser;
+        user
+          .sendEmailVerification()
+          .then(function() {
+            // Email sent.
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
       }
     }
   };

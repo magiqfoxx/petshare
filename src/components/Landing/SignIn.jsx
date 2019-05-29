@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 
 import firebase from "../firebase";
+import RemindPassword from "./RemindPassword";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showRemindPassword, setShowRemindPassword] = useState(false);
 
   const handleSignIn = async event => {
     event.preventDefault();
@@ -44,7 +46,16 @@ const SignIn = () => {
           placeholder="********"
         />
         <input className="input__button" type="submit" value="submit" />
+        <p
+          className="form__text form__text--primary"
+          onClick={() => setShowRemindPassword(true)}
+        >
+          I forgot my password
+        </p>
       </form>
+      {showRemindPassword ? (
+        <RemindPassword close={() => setShowRemindPassword(false)} />
+      ) : null}
     </div>
   );
 };

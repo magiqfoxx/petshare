@@ -8,9 +8,8 @@ import Landing from "./components/Landing/Landing";
 import About from "./components/About";
 import Search from "./components/Search/Search";
 import Profile from "./components/Profile/Profile";
-import Settings from "./components/Settings";
+import Settings from "./components/Settings/Settings";
 import Footer from "./components/Footer";
-import { addNewUserToDatabase } from "./components/utilities/addToDatabase";
 
 export const UserContext = React.createContext();
 
