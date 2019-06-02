@@ -1,8 +1,9 @@
 import { uploadPetImg } from "./addToStorage";
 import { addNewPetToDataBase, addNewPetToCollection } from "./addToDatabase";
-import { updatePetInDataBase } from "./updateDatabase";
+import { updatePetInDataBase, updatePetInCollection } from "./updateDatabase";
 import {
   removeUserFromDataBase,
+  removeAuthUser,
   removeAllOfUsersPetsFromCollection,
   removePetFromDataBase,
   removePetFromCollection
@@ -25,33 +26,36 @@ export const dataChanged = (oldPet, newPet) => {
     return false;
   }
 };
-
+//removeUserImg(userUID); when a new picture is sent
 export const deleteUser = userUID => {
   //remove user's pets from collection of all pets
   removeAllOfUsersPetsFromCollection(userUID);
 
   removeUserFromDataBase(userUID);
-  removeUserImg(userUID);
+  //removeUserImg(userUID); delete the folder instead
   removeUserStorage(userUID);
 
+  //REMOVE THE PETS SUBCOLLECTION MANUALLY
+
   //  REMOVE FROM AUTHORIZED ACCOUNTS!!!
+  removeAuthUser();
 };
 
 //  PETS    //
 export const addNewPet = async (userUID, newPet, image) => {
   const petRef = await addNewPetToDataBase(userUID, newPet);
   const petUID = petRef.id;
-  addNewPetToCollection(newPet, petUID);
+  //addNewPetToCollection(petUID, newPet);
   uploadPetImg(userUID, petUID, image); //also adds refs to DB
 };
 export const updatePetData = (userUID, petUID, newPet) => {
-  updatePetInDataBase(userUID, newPet);
-  addNewPetToCollection(newPet, petUID);
+  updatePetInDataBase(userUID, petUID, newPet);
+  //updatePetInCollection(petUID, newPet);
 };
 
 export const removePet = (userUID, petUID) => {
   removePetFromDataBase(userUID, petUID);
-  removePetFromCollection(petUID);
+  //removePetFromCollection(petUID);
   removePetImg(userUID, petUID);
 };
 

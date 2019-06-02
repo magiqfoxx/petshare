@@ -1,10 +1,22 @@
-import { firestore } from "../firebase";
+import firebase, { firestore } from "../firebase";
 
 export const removeUserFromDataBase = userUID => {
   firestore
     .collection("users")
     .doc(userUID)
     .delete();
+};
+export const removeAuthUser = () => {
+  const user = firebase.auth().currentUser;
+
+  user
+    .delete()
+    .then(function() {
+      // User deleted.
+    })
+    .catch(function(error) {
+      // An error happened.
+    });
 };
 export const removeAllOfUsersPetsFromCollection = userUID => {
   firestore

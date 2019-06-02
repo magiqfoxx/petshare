@@ -21,7 +21,7 @@ body {
   width: 100vw;
   min-height: 100vh;
   display: grid;
-  grid-template-rows: 3rem auto 4rem;
+  grid-template-rows: 3rem auto 2rem;
   background-color: $background-color;
 }
 section {
@@ -39,5 +39,7 @@ main {
 }
 footer {
   margin: 0 auto;
-  text-align: center;
+  align-self: self-end;
+  font-size: 0.7rem;
+  padding: 0.5rem;
 }

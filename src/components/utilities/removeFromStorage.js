@@ -2,6 +2,7 @@ import { storage } from "../firebase";
 
 export const removeUserImg = userUID => {
   //try to remove both file extensions
+  //i don't have to do this if i delete the whole folder?
   try {
     storage.ref(`images/users/${userUID}/${userUID}.jpg`).delete();
     storage.ref(`images/users/${userUID}/${userUID}.png`).delete();

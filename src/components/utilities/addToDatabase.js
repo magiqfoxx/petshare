@@ -11,7 +11,7 @@ export const addNewPetToDataBase = async (userUID, newPet) => {
   return await userRef.collection("pets").add(newPet);
   //returns ref to the new pet
 };
-export const addNewPetToCollection = async (newPet, petUID) => {
+export const addNewPetToCollection = async (petUID, newPet) => {
   return await firestore
     .collection("pets")
     .doc(petUID)

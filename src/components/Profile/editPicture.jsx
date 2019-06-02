@@ -40,7 +40,7 @@ const EditPicture = props => {
           onSubmit={event => handleSubmit(event)}
           onClick={event => event.stopPropagation()}
         >
-          <button className="quit" onClick={() => props.close()}>
+          <button type="button" className="quit" onClick={() => props.close()}>
             <img src={quitImg} alt="quit" />
           </button>
           <h1 className="form__title">Select a picture</h1>

@@ -9,6 +9,10 @@
   box-shadow: 3px 5px 11px 0px rgba(23, 23, 23, 0.88);
   text-align: center;
 
+  &__image {
+    max-width: 70%;
+    max-height: 80%;
+  }
   &__title {
     font-size: 1rem;
   }
@@ -30,5 +34,14 @@
     &:hover {
       border: 1px solid #d4305e;
     }
+  }
+  &--form {
+    padding: 2rem;
+    border-radius: $border-radius;
+  }
+  .form__file {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    line-height: 0rem;
   }
 }

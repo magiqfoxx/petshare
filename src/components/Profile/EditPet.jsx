@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { UserContext } from "../../App";
 
+import Modal from "../Modals/Modal";
 import FormError from "../Landing/FormError";
 import { dataChanged, updatePetData } from "../utilities/utilities";
 import { uploadPetImg } from "../utilities/addToStorage";
@@ -34,7 +35,7 @@ class EditNewPet extends Component {
 
       //check if any changes were made
       if (wasDataChanged) {
-        updatePetData(user.uid, pet.uid, newPet);
+        updatePetData(user.uid, this.props.pet.uid, newPet);
       }
       if (this.state.imageChanged) {
         uploadPetImg(user.uid, pet.uid, this.state.image);
@@ -69,7 +70,11 @@ class EditNewPet extends Component {
                 onSubmit={event => this.handleSubmit(event, context)}
                 onClick={event => event.stopPropagation()}
               >
-                <button className="quit" onClick={() => this.props.close()}>
+                <button
+                  type="button"
+                  className="quit"
+                  onClick={() => this.props.close()}
+                >
                   <img src={quitImg} alt="quit" />
                 </button>
                 <h1 className="form__title">Edit your pet</h1>
@@ -80,27 +85,46 @@ class EditNewPet extends Component {
                     alt="your pet"
                   />
                   <button
+                    type="button"
                     className="edit"
                     onClick={() => this.setState({ showAddImg: true })}
                   >
                     <img src={editImg} alt="edit" />
                   </button>
                 </div>
-                {this.state.showAddImg ? (
-                  <React.Fragment>
-                    <input
-                      className="form__file"
-                      type="file"
-                      name="image"
-                      id="image"
-                      accept="image/png, image/jpeg"
-                      onChange={this.setImage}
-                    />
-                    <p className="form__text">
-                      Please, choose a jpg or png file.
-                    </p>
-                  </React.Fragment>
-                ) : null}
+                {this.state.showAddImg && (
+                  <Modal
+                    component={
+                      <div
+                        className="background"
+                        onClick={() => this.setState({ showAddImg: false })}
+                      >
+                        <div
+                          className="modal modal--form"
+                          onClick={event => event.stopPropagation()}
+                        >
+                          <input
+                            className="form__file"
+                            type="file"
+                            name="image"
+                            id="image"
+                            accept="image/png, image/jpeg"
+                            onChange={this.setImage}
+                          />
+                          <p className="form__text">
+                            Please, choose a jpg or png file.
+                          </p>
+                          <button
+                            className="submit-button"
+                            onClick={() => this.setState({ showAddImg: false })}
+                          >
+                            Close
+                          </button>
+                        </div>
+                      </div>
+                    }
+                  />
+                )}
 
                 <label className="form__label form__label--name" htmlFor="name">
                   Name:
@@ -112,6 +136,7 @@ class EditNewPet extends Component {
                   id="name"
                   onChange={this.handleChange}
                   value={this.state.name}
+                  maxLength={12}
                 />
                 <label
                   className="form__label form__label--species"
@@ -126,17 +151,19 @@ class EditNewPet extends Component {
                   id="species"
                   onChange={this.handleChange}
                   value={this.state.species}
+                  maxLength={20}
                 />
                 <label className="form__label form__label--age" htmlFor="age">
                   Age:
                 </label>
                 <input
                   className="form__input form__input--age form__text-input"
-                  type="number"
+                  type="text"
                   name="age"
                   id="age"
                   onChange={this.handleChange}
                   value={this.state.age}
+                  maxLength={10}
                 />
                 <label
                   className="form__label form__label--description"

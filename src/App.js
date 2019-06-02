@@ -35,34 +35,42 @@ function App() {
           email,
           uid
         });
-        const userRef = firestore.collection("users").doc(uid);
-        //grab all the user data from the database
-        //and listen for changes (snapshot)
-        userRef.onSnapshot(doc => {
-          //updates database data
-          const dataBase = doc.data();
-          setLoggedUser(state => {
-            return { ...state }, dataBase;
-          });
-        });
-
-        //grab all pets for this user
-        //and listen for changes - snapshot
-        userRef.collection("pets").onSnapshot(pets => {
-          const allPets = [];
-          pets.forEach(pet => {
-            allPets.push({ id: pet.id, ...pet.data() });
-          });
-          setLoggedUser(state => {
-            return { ...state, allPets };
-          });
-        });
+        setUser(uid);
+        setPets(uid);
       } else {
         // User is signed out.
         setLoggedUser(null);
       }
     });
   }, []);
+  const setUser = uid => {
+    //UNSUBSCRIBING?
+    const userRef = firestore.collection("users").doc(uid);
+    //grab all the user data from the database
+    //and listen for changes (snapshot)
+    return userRef.onSnapshot(doc => {
+      //updates database data
+      const dataBase = doc.data();
+      setLoggedUser(state => {
+        return { ...state }, dataBase;
+      });
+    });
+  };
+
+  const setPets = uid => {
+    const userRef = firestore.collection("users").doc(uid);
+    //grab all pets for this user
+    //and listen for changes - snapshot
+    return userRef.collection("pets").onSnapshot(pets => {
+      const allPets = [];
+      pets.forEach(pet => {
+        allPets.push({ id: pet.id, ...pet.data() });
+      });
+      setLoggedUser(state => {
+        return { ...state, allPets };
+      });
+    });
+  };
   return (
     <UserContext.Provider value={loggedUser}>
       <div className="app">
@@ -72,7 +80,7 @@ function App() {
         <Route path="/search/" component={Search} />
         <Route path="/profile/" component={Profile} />
         <Route path="/settings/" component={Settings} />
-        <footer />
+        <Footer />
       </div>
     </UserContext.Provider>
   );

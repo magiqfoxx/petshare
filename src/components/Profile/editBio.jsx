@@ -29,7 +29,7 @@ const EditBio = props => {
           onSubmit={handleSubmit}
           onClick={event => event.stopPropagation()}
         >
-          <button className="quit" onClick={() => props.close()}>
+          <button type="button" className="quit" onClick={() => props.close()}>
             <img src={quitImg} alt="quit" />
           </button>
           <h1 className="form__title">Add a bio</h1>

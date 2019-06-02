@@ -1,12 +1,15 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../../App";
 
+import ConfirmationPopUp from "../Modals/ConfirmationPopup";
+import Modal from "../Modals/Modal";
 import { removePet } from "../utilities/utilities";
 import editImg from "../../img/icons/edit.svg";
 import deleteImg from "../../img/icons/garbage.svg";
 
 const Pet = props => {
-  const [showMessage, setShowMessage] = useState(false);
+  const [showDeleteMessage, setShowDeleteMessage] = useState(false);
+  const [enlargeImg, setEnlargeImg] = useState(false);
   const user = useContext(UserContext);
 
   //render Modal with: Are you sure you want to delete?
@@ -22,9 +25,14 @@ const Pet = props => {
   const petObj = { ...props };
   return (
     <div className="pet pet-slate">
-      <img className="pet__image" src={props.img} alt="" />
+      <img
+        className="pet__image"
+        src={props.img}
+        alt="pet"
+        onClick={() => setEnlargeImg(true)}
+      />
       {props.editable ? (
-        <button className="delete" onClick={deletePet}>
+        <button className="delete" onClick={() => setShowDeleteMessage(true)}>
           <img className="delete__img" src={deleteImg} alt="delete" />
         </button>
       ) : null}
@@ -39,6 +47,25 @@ const Pet = props => {
         ) : null}
       </div>
       <p className="pet__description">{props.description}</p>
+      {enlargeImg && (
+        <Modal
+          component={
+            <div className="background" onClick={() => setEnlargeImg(false)}>
+              <img className="modal__image" src={props.img} />
+            </div>
+          }
+        />
+      )}
+      {showDeleteMessage && (
+        <Modal
+          component={
+            <ConfirmationPopUp
+              close={() => setShowDeleteMessage(false)}
+              proceed={deletePet}
+            />
+          }
+        />
+      )}
     </div>
   );
 };

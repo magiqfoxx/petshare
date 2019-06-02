@@ -5,6 +5,7 @@ import { UserContext } from "../../App";
 import { updateUserInDataBase } from "../utilities/updateDatabase";
 import quitImg from "../../img/icons/cancel.svg";
 
+//ADD REAUTHORISATION???
 const EditEmail = props => {
   const [newEmail, setNewEmail] = useState("");
   const user = useContext(UserContext);

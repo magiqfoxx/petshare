@@ -1,5 +1,6 @@
 .sign-in {
   @extend .sign-up;
+  margin: 2rem;
   form {
     background-color: $color-gray;
   }

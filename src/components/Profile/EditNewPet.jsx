@@ -62,7 +62,11 @@ class EditNewPet extends Component {
                 onSubmit={event => this.handleSubmit(event, context)}
                 onClick={event => event.stopPropagation()}
               >
-                <button className="quit" onClick={() => this.props.close()}>
+                <button
+                  type="button"
+                  className="quit"
+                  onClick={() => this.props.close()}
+                >
                   <img src={quitImg} alt="quit" />
                 </button>
                 <h1 className="form__title">Add a new pet</h1>
@@ -74,27 +78,37 @@ class EditNewPet extends Component {
                   id="name"
                   onChange={this.handleChange}
                   value={this.state.name}
+                  maxLength={12}
                   required
                 />
                 <label htmlFor="species">Species:</label>
                 <input
-                  className="form__text-input"
-                  type="text"
-                  name="species"
+                  className="form__text-input filter__input"
+                  list="speciess"
                   id="species"
+                  name="species"
                   onChange={this.handleChange}
                   value={this.state.species}
+                  maxLength={20}
                   required
                 />
+                <datalist id="speciess">
+                  <option value="dog" />
+                  <option value="cat" />
+                  <option value="reptile" />
+                  <option value="rodent" />>
+                  <option value="bird" />
+                </datalist>
                 <label htmlFor="age">Age:</label>
                 <input
                   className="form__text-input"
-                  type="number"
+                  type="string"
                   name="age"
                   id="age"
                   onChange={this.handleChange}
                   value={this.state.age}
                   required
+                  maxLength={10}
                 />
                 <label htmlFor="description">Description:</label>
                 <textarea
@@ -107,11 +121,7 @@ class EditNewPet extends Component {
                   onChange={this.handleChange}
                   value={this.state.description}
                 />
-                <img
-                  className="form__img"
-                  src={pictureImg}
-                  alt="picture icon"
-                />
+                <img className="form__img" src={pictureImg} alt="add image" />
                 <input
                   className="form__file"
                   type="file"

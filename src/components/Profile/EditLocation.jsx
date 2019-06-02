@@ -1,8 +1,12 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../../App";
 
-import { updateUserInDataBase } from "../utilities/updateDatabase";
+import {
+  updateUserInDataBase,
+  updatePetInDataBase
+} from "../utilities/updateDatabase";
 import quitImg from "../../img/icons/cancel.svg";
+import { firestore } from "../firebase";
 
 const EditLocation = props => {
   const [location, setLocation] = useState("");
@@ -13,12 +17,23 @@ const EditLocation = props => {
 
     try {
       updateUserInDataBase(user.uid, { location });
+
+      firestore
+        .collection("users")
+        .doc(user.uid)
+        .collection("pets")
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(pet => {
+            updatePetInDataBase(user.uid, pet.id, { location });
+          });
+        });
     } catch (error) {
       console.log(error);
     }
     props.close();
   };
-  const handleChange = event => {
+  const handleChange = async event => {
     setLocation(event.target.value);
   };
   return (
@@ -29,7 +44,7 @@ const EditLocation = props => {
           onSubmit={handleSubmit}
           onClick={event => event.stopPropagation()}
         >
-          <button className="quit" onClick={() => props.close()}>
+          <button type="button" className="quit" onClick={() => props.close()}>
             <img src={quitImg} alt="quit" />
           </button>
           <h1 className="form__title">Add a location</h1>

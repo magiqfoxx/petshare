@@ -14,7 +14,7 @@ export const updatePetInDataBase = async (userUID, petUID, newPet) => {
     .update(newPet);
 };
 
-export const updatePetInCollection = async (newPet, petUID) => {
+export const updatePetInCollection = async (petUID, newPet) => {
   return await firestore
     .collection("pets")
     .doc(petUID)
