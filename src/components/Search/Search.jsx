@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import SearchBar from "./SearchBar";
 import Results from "./Results";
 import Filter from "./Filter";
+import { getCoords } from "../utilities/geoLocation";
+import { geohashEncode } from "../utilities/geoHash";
 
 import { firestore } from "../firebase";
 
@@ -11,8 +13,13 @@ const Search = () => {
   const [age, setAge] = useState(0);
   const [pets, setPets] = useState([]);
 
-  const handleSubmit = location => {
+  const handleSubmit = async location => {
     let query;
+    //get coords for place from api
+    const coords = await getCoords(location);
+    //show loader before the window closes
+    const geohash = geohashEncode(coords.lat, coords.lon, 5);
+
     if (location) {
       query = firestore
         .collectionGroup("pets")

@@ -1,0 +1,21 @@
+.dashboard {
+  display: grid;
+  grid-template-areas:
+    "posts new-post"
+    "posts recommended"
+    "posts recommended";
+  .new-post {
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+  }
+  .posts {
+    grid-area: posts;
+  }
+  .new-post {
+    grid-area: new-post;
+  }
+  .recommended {
+    grid-area: recommended;
+  }
+}

@@ -225,3 +225,26 @@
     transform: translateX(3px) translateY(3px);
   }
 }
+.geoLocation {
+  display: flex;
+  margin: 1rem;
+  &__button {
+    width: 2rem;
+    margin-right: 1rem;
+    background-color: white;
+    border-radius: $border-radius;
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #ffc0cb;
+    border-left-color: #ffc0cb;
+    border-bottom-color: $primary-color;
+    border-right-color: $primary-color;
+    &:active {
+      border-top-color: $primary-color;
+      border-left-color: $primary-color;
+      border-bottom-color: #ffc0cb;
+      border-right-color: #ffc0cb;
+      background-color: whitesmoke;
+    }
+  }
+}

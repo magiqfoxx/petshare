@@ -8,6 +8,7 @@ import Landing from "./components/Landing/Landing";
 import About from "./components/About";
 import Search from "./components/Search/Search";
 import Profile from "./components/Profile/Profile";
+import UserProfile from "./components/Profile/UserProfile";
 import Settings from "./components/Settings/Settings";
 import Footer from "./components/Footer";
 
@@ -80,6 +81,7 @@ function App() {
         <Route path="/search/" component={Search} />
         <Route path="/profile/" component={Profile} />
         <Route path="/settings/" component={Settings} />
+        <Route path="/user/:id" component={UserProfile} />
         <Footer />
       </div>
     </UserContext.Provider>

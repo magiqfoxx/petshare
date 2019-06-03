@@ -2,6 +2,7 @@ import { storage } from "../firebase";
 
 import {
   addImgRefToUser,
+  addImgRefToPost,
   addImgRefToPet,
   addImgRefToPetCollection
 } from "./addToDatabase";
@@ -26,7 +27,15 @@ export const uploadUserImg = async (userUID, image) => {
 
   addImgRefToUser(userUID, pictureRef);
 };
+export const uploadPostImg = async (userUID, postID, image) => {
+  const fileType = getExtension(image);
+  const storageRef = storage.ref(
+    `images/users/${userUID}/posts/${postID}.${fileType}`
+  );
+  const pictureRef = await uploadImg(storageRef, image);
 
+  addImgRefToPost(userUID, postID, pictureRef);
+};
 export const uploadPetImg = async (userUID, petUID, image) => {
   const fileType = getExtension(image);
   const storageRef = storage.ref(

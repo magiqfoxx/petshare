@@ -6,6 +6,17 @@ export const addNewUserToDatabase = newUser => {
     .doc(newUser.uid)
     .set(newUser, { merge: true });
 };
+export const addNewPost = async (userUID, newPost) => {
+  const postsRef = firestore
+    .collection("users")
+    .doc(userUID)
+    .collection("posts");
+
+  const post = await postsRef.add(newPost);
+  postsRef.doc(post.id).update({ id: post.id });
+
+  return post.id;
+};
 export const addNewPetToDataBase = async (userUID, newPet) => {
   const userRef = await firestore.collection("users").doc(userUID);
   return await userRef.collection("pets").add(newPet);
@@ -19,6 +30,19 @@ export const addNewPetToCollection = async (petUID, newPet) => {
 };
 export const addImgRefToUser = async (userUID, pictureRef) => {
   const userRef = await firestore.collection("users").doc(userUID);
+  await userRef.set(
+    {
+      img: pictureRef
+    },
+    { merge: true }
+  );
+};
+export const addImgRefToPost = async (userUID, postID, pictureRef) => {
+  const userRef = await firestore
+    .collection("users")
+    .doc(userUID)
+    .collection("posts")
+    .doc(postID);
   await userRef.set(
     {
       img: pictureRef

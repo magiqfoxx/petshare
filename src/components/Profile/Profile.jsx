@@ -7,6 +7,7 @@ import EditLocation from "./EditLocation";
 import EditNewPet from "./EditNewPet";
 import EditPet from "./EditPet";
 import Pet from "./Pet";
+import Posts from "./Posts";
 
 import userImg from "../../img/icons/profile.svg";
 import editImg from "../../img/icons/edit.svg";
@@ -117,6 +118,7 @@ const Profile = props => {
         {showEditPet ? (
           <EditPet close={() => setShowEditPet(false)} pet={showEditPet} />
         ) : null}
+        <Posts user={user} />
       </main>
     );
   };

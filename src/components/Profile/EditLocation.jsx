@@ -5,29 +5,54 @@ import {
   updateUserInDataBase,
   updatePetInDataBase
 } from "../utilities/updateDatabase";
+import { getLocation } from "../utilities/geoLocation";
+import { geohashEncode } from "../utilities/geoHash";
 import quitImg from "../../img/icons/cancel.svg";
+import geoLocationImg from "../../img/icons/target.svg";
 import { firestore } from "../firebase";
 
 const EditLocation = props => {
   const [location, setLocation] = useState("");
+  const [coords, setCoords] = useState("");
+  const [geohash, setGeohash] = useState("");
   const user = useContext(UserContext);
 
+  const getGeoLocation = async () => {
+    const location = await getLocation();
+    const geohash = geohashEncode(
+      location.coords.latitude,
+      location.coords.longitude,
+      5
+    );
+    const newCoords = {
+      lat: location.coords.latitude,
+      lon: location.coords.longitude
+    };
+    setCoords(newCoords);
+    setGeohash(geohash);
+  };
   const handleSubmit = async event => {
     event.preventDefault();
 
     try {
-      updateUserInDataBase(user.uid, { location });
+      if (coords != {}) {
+        updateUserInDataBase(user.uid, { location, coords, geohash });
 
-      firestore
-        .collection("users")
-        .doc(user.uid)
-        .collection("pets")
-        .get()
-        .then(snapshot => {
-          snapshot.forEach(pet => {
-            updatePetInDataBase(user.uid, pet.id, { location });
+        firestore
+          .collection("users")
+          .doc(user.uid)
+          .collection("pets")
+          .get()
+          .then(snapshot => {
+            snapshot.forEach(pet => {
+              updatePetInDataBase(user.uid, pet.id, {
+                location,
+                coords,
+                geohash
+              });
+            });
           });
-        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -49,15 +74,24 @@ const EditLocation = props => {
           </button>
           <h1 className="form__title">Add a location</h1>
           <label htmlFor="location">Location:</label>
-          <input
-            className="form__text-input"
-            type="text"
-            name="location"
-            id="location"
-            onChange={handleChange}
-            value={location}
-            required
-          />
+          <div className="geoLocation">
+            <button
+              type="button"
+              className="geoLocation__button"
+              onClick={getGeoLocation}
+            >
+              <img src={geoLocationImg} alt="geolocation" />
+            </button>
+            <input
+              className="form__text-input"
+              type="text"
+              name="location"
+              id="location"
+              onChange={handleChange}
+              value={location}
+            />
+          </div>
+
           <input className="input__button" type="submit" value="submit" />
         </form>
       </div>

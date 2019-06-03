@@ -1,0 +1,64 @@
+.post {
+  padding: 1rem;
+  margin-top: 1rem;
+  &__title {
+    font-size: 1rem;
+  }
+  &__date {
+    font-size: 0.6rem;
+  }
+  &__image {
+    max-width: 100%;
+  }
+  &__text {
+    font-size: 0.9rem;
+  }
+  &__author {
+    font-size: 0.7rem;
+    text-align: right;
+  }
+}
+
+.new-post {
+  padding: 1rem;
+  .input {
+    border: 1px solid $primary-color;
+    border-radius: $border-radius;
+    margin: 0.5rem 0rem;
+    padding: 0 0.5rem;
+  }
+  .label {
+    color: grey;
+  }
+  &__title {
+    font-size: 1rem;
+  }
+  &__text {
+    font-size: 0.9rem;
+  }
+  &__picture {
+    width: 2rem;
+    &-input {
+      display: none;
+    }
+  }
+  .input__button {
+    background-color: $primary-color;
+    color: white;
+    height: 2rem;
+    border: none;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    border-radius: $border-radius;
+    cursor: pointer;
+    &:hover {
+      background-color: $hot-pink;
+      color: white;
+      transition: background-color 1s;
+    }
+    &:active {
+      transform: translateX(3px) translateY(3px);
+    }
+  }
+}
