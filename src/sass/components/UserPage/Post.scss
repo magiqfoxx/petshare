@@ -1,6 +1,5 @@
 .post {
   padding: 1rem;
-  margin-top: 1rem;
   &__title {
     font-size: 1rem;
   }
@@ -35,6 +34,8 @@
   }
   &__text {
     font-size: 0.9rem;
+    min-height: 10rem;
+    min-width: 10rem;
   }
   &__picture {
     width: 2rem;

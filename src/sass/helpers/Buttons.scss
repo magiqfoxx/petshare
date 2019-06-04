@@ -46,6 +46,20 @@
   &:active {
   }
 }
+.like {
+  @extend .delete;
+}
+.liked {
+  @extend .like;
+  background-color: $primary-color;
+}
+.follow {
+  @extend .like;
+}
+.followed {
+  @extend .like;
+  background-color: yellow;
+}
 .icon--button {
   background-color: transparent;
   border: none;

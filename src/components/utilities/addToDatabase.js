@@ -17,6 +17,7 @@ export const addNewPost = async (userUID, newPost) => {
 
   return post.id;
 };
+
 export const addNewPetToDataBase = async (userUID, newPet) => {
   const userRef = await firestore.collection("users").doc(userUID);
   return await userRef.collection("pets").add(newPet);

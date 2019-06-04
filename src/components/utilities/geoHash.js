@@ -229,7 +229,7 @@ Geohash.adjacent = function(geohash, direction) {
  * @returns {{n,ne,e,se,s,sw,w,nw: string}}
  * @throws  Invalid geohash.
  */
-Geohash.neighbours = function(geohash) {
+export const geohashGetNeighbours = function(geohash) {
   return {
     n: Geohash.adjacent(geohash, "n"),
     ne: Geohash.adjacent(Geohash.adjacent(geohash, "n"), "e"),

@@ -38,6 +38,7 @@ function App() {
         });
         setUser(uid);
         setPets(uid);
+        setPosts(uid);
       } else {
         // User is signed out.
         setLoggedUser(null);
@@ -69,6 +70,21 @@ function App() {
       });
       setLoggedUser(state => {
         return { ...state, allPets };
+      });
+    });
+  };
+
+  const setPosts = uid => {
+    const userRef = firestore.collection("users").doc(uid);
+    //grab all pets for this user
+    //and listen for changes - snapshot
+    return userRef.collection("posts").onSnapshot(posts => {
+      const allPosts = [];
+      posts.forEach(post => {
+        allPosts.push({ id: post.id, ...post.data() });
+      });
+      setLoggedUser(state => {
+        return { ...state, allPosts };
       });
     });
   };

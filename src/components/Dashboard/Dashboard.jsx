@@ -1,10 +1,15 @@
 import React from "react";
 
+import FollowedPosts from "./FollowedPosts";
 import NewPost from "./NewPost";
-import Post from "./Post";
 
 const Dashboard = () => {
-  return <NewPost />;
+  return (
+    <div className="dashboard">
+      <FollowedPosts />
+      <NewPost />
+    </div>
+  );
 };
 
 export default Dashboard;

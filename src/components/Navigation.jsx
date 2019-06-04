@@ -54,7 +54,7 @@ const Navigation = props => {
   return (
     <nav className="nav">
       <div className="nav__logo" id="logo">
-        <Link to="./">PetShare</Link>
+        <Link to="/">PetShare</Link>
       </div>
       <ul className="nav__ul">
         <li className="nav__ul__li">

@@ -4,6 +4,9 @@
     "posts new-post"
     "posts recommended"
     "posts recommended";
+  grid-gap: 2rem;
+  padding: 1rem;
+  background-color: white;
   .new-post {
     display: flex;
     flex-direction: column;

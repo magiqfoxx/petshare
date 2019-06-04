@@ -11,17 +11,17 @@ const Landing = () => {
   //const [user, setUser] = useState(null);
   const [signIn, setSignIn] = useState(false);
   return (
-    <main className="landing">
+    <main className="main">
       {user ? (
         <Dashboard />
       ) : (
-        <React.Fragment>
+        <div className="landing">
           <div className="landing__form">
             <SignUp signIn={() => setSignIn(true)} />
           </div>
 
           {signIn ? <SignIn /> : <WhySignUp />}
-        </React.Fragment>
+        </div>
       )}
     </main>
   );

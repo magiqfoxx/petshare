@@ -46,7 +46,7 @@ const NewPost = props => {
   };
 
   return (
-    <div className="dashboard small-slate">
+    <div className="new-post small-slate">
       <form
         className="new-post"
         onSubmit={handleSubmit}
