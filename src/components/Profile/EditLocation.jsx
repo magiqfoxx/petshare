@@ -1,10 +1,8 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../../App";
 
-import {
-  updateUserInDataBase,
-  updatePetInDataBase
-} from "../utilities/updateDatabase";
+import { updateUser } from "../utilities/utilities";
+import { updatePetInDataBase } from "../utilities/updateDatabase";
 import { getLocation } from "../utilities/geoLocation";
 import { geohashEncode } from "../utilities/geoHash";
 import quitImg from "../../img/icons/cancel.svg";
@@ -35,24 +33,22 @@ const EditLocation = props => {
     event.preventDefault();
 
     try {
-      if (coords != {}) {
-        updateUserInDataBase(user.uid, { location, coords, geohash });
+      updateUser(user.uid, { location, coords, geohash });
 
-        firestore
-          .collection("users")
-          .doc(user.uid)
-          .collection("pets")
-          .get()
-          .then(snapshot => {
-            snapshot.forEach(pet => {
-              updatePetInDataBase(user.uid, pet.id, {
-                location,
-                coords,
-                geohash
-              });
+      firestore
+        .collection("users")
+        .doc(user.uid)
+        .collection("pets")
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(pet => {
+            updatePetInDataBase(user.uid, pet.id, {
+              location,
+              coords,
+              geohash
             });
           });
-      }
+        });
     } catch (error) {
       console.log(error);
     }

@@ -1,37 +1,36 @@
 import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../App";
-import { firestore } from "../firebase.js";
 
-import Pet from "../Profile/Pet";
+import DashboardSlate from "./DashboardSlate";
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
   const user = useContext(UserContext);
 
   useEffect(() => {
-    console.log(user);
-    setFavorites(user.favorites);
-    /*const query = firestore
-      .users(user.uid)
-      .doc("favorites")
-      .get()
-      .then(results => {
-        if (results.length > 0) {
-          setFavorites(results.data());
-        } else {
-          setFavorites("Sorry. No pets matched your query");
-        }
-      });*/
-  }, []);
+    setFavorites(user.likes);
+  }, [user]);
 
   const renderFavorites = () => {
     if (favorites) {
       return favorites.map(pet => {
-        <Pet name={pet.name} image={pet.img} />;
+        return (
+          <DashboardSlate
+            key={pet.id}
+            image={pet.img}
+            name={pet.name}
+            id={pet.owner.id}
+          />
+        );
       });
     }
   };
-  return <div className="favorites">{renderFavorites()}</div>;
+  return (
+    <div className="favorites small-slate">
+      <h3>Favorite Pets</h3>
+      <div className="favorites-list">{renderFavorites()}</div>
+    </div>
+  );
 };
 
 export default Favorites;

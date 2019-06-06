@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../App";
 
 import ConfirmationPopUp from "../Modals/ConfirmationPopup";
@@ -13,8 +13,8 @@ const Pet = props => {
   const [showDeleteMessage, setShowDeleteMessage] = useState(false);
   const [enlargeImg, setEnlargeImg] = useState(false);
   const user = useContext(UserContext);
-  //render Modal with: Are you sure you want to delete?
-  //showMessage onClick => deletePet
+
+  useEffect(() => {}, [props]);
   const deletePet = () => {
     try {
       removePet(user.uid, props.uid);
@@ -23,10 +23,19 @@ const Pet = props => {
     }
   };
   const addToLikes = () => {
-    addPetToLikes(user.uid, props.id);
+    const pet = {
+      img: props.img,
+      name: props.name,
+      age: props.age,
+      id: props.uid,
+      owner: props.owner
+    };
+    addPetToLikes(user.uid, props.owner.id, props.uid, pet);
   };
   const removeFromLikes = () => {
-    removePetFromLikes(user.uid, props.id);
+    //RELIES ON THE FACT THAT THE PET OBJECT WILL NOT CHANGE
+    //TERRIBLE IDEA
+    removePetFromLikes(user.uid, props.owner.id, props.uid, props);
   };
   //send to parent to populate the form
   const petObj = { ...props };
@@ -42,7 +51,7 @@ const Pet = props => {
         <button className="delete" onClick={() => setShowDeleteMessage(true)}>
           <img className="delete__img" src={deleteImg} alt="delete" />
         </button>
-      ) : user.likes && user.likes.includes(props.id) ? (
+      ) : props.likedBy && props.likedBy.includes(user.uid) ? (
         <button className="like liked" onClick={removeFromLikes}>
           <img
             className="like__img"

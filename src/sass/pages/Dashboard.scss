@@ -1,9 +1,11 @@
 .dashboard {
   display: grid;
   grid-template-areas:
-    "posts new-post"
-    "posts recommended"
-    "posts recommended";
+    "posts posts add-new-post"
+    "posts posts favorites"
+    "posts posts follows"
+    "posts posts ."
+    "posts posts .";
   grid-gap: 2rem;
   padding: 1rem;
   background-color: white;
@@ -12,7 +14,7 @@
     flex-direction: column;
     overflow: visible;
   }
-  .posts {
+  .following {
     grid-area: posts;
   }
   .new-post {
@@ -20,5 +22,41 @@
   }
   .recommended {
     grid-area: recommended;
+  }
+  .favorites {
+    grid-area: favorites;
+    height: min-content;
+    &-list {
+      display: inline-grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 1rem;
+      width: 100%;
+    }
+  }
+  .follows {
+    grid-area: follows;
+    height: min-content;
+    &-list {
+      display: inline-grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 1rem;
+      width: 100%;
+    }
+  }
+  .pet-slate {
+    box-shadow: 3px 3px 5px #d6d5d5;
+    background-color: #f7f4f4; //#efecec;
+    border-radius: 0.2rem;
+    overflow: hidden;
+    position: relative;
+    &__image {
+      width: 100%;
+      cursor: pointer;
+    }
+    &__bolded {
+      background-color: $primary-color;
+      padding: 0.2rem 0.5rem;
+      color: white;
+    }
   }
 }

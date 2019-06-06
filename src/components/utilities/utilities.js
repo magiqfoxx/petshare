@@ -1,10 +1,24 @@
 import { uploadPetImg } from "./addToStorage";
-import { addNewPetToDataBase, addNewPetToCollection } from "./addToDatabase";
-import { updatePetInDataBase, updatePetInCollection } from "./updateDatabase";
+import {
+  addNewUserToDatabase,
+  addNewPetToDataBase,
+  addNewPetToCollection,
+  addNewPostToDataBase
+} from "./addToDatabase";
+import {
+  updateUserInDataBase,
+  addPetToLikes,
+  removePetFromLikes,
+  addUserToFollowed,
+  removeUserFromFollowed,
+  updatePetInDataBase,
+  updatePetInCollection
+} from "./updateDatabase";
 import {
   removeUserFromDataBase,
   removeAuthUser,
-  removeAllOfUsersPetsFromCollection,
+  removeAllOfUsersPetsFromDataBase,
+  removePostFromDataBase,
   removePetFromDataBase,
   removePetFromCollection
 } from "./removeFromDatabase";
@@ -14,10 +28,9 @@ import {
   removePetImg
 } from "./removeFromStorage";
 
+//  DATE  //
+
 export const getDate = () => {
-  //const date = new Date();
-  //return `${date.getHours()}:${date.getMinutes()} - ${date.getDate()} ${date.getMonth() +
-  //1}.${date.getFullYear()}`;
   return Date.now();
 };
 const months = [
@@ -56,18 +69,52 @@ export const dataChanged = (oldPet, newPet) => {
   }
 };
 //removeUserImg(userUID); when a new picture is sent
+
+//USERS//
+export const addNewUser = newUser => {
+  addNewUserToDatabase(newUser);
+};
+export const updateUser = (userUID, newUser) => {
+  updateUserInDataBase(userUID, newUser);
+};
 export const deleteUser = userUID => {
   //remove user's pets from collection of all pets
-  removeAllOfUsersPetsFromCollection(userUID);
+  //removeAllOfUsersPetsFromCollection(userUID);
 
+  //necessary to remove the collection
+  removeAllOfUsersPetsFromDataBase(userUID);
   removeUserFromDataBase(userUID);
   //removeUserImg(userUID); delete the folder instead
   removeUserStorage(userUID);
 
-  //REMOVE THE PETS SUBCOLLECTION MANUALLY
-
-  //  REMOVE FROM AUTHORIZED ACCOUNTS!!!
   removeAuthUser();
+};
+
+//  POSTS   //
+
+export const addNewPost = (userUID, newPost) => {
+  return addNewPostToDataBase(userUID, newPost);
+};
+export const removePost = (userUID, postID) => {
+  removePostFromDataBase(userUID, postID);
+};
+
+//  LIKES  //
+const addToLikes = (userUID, ownerID, likeID, likedPet) => {
+  addPetToLikes(userUID, ownerID, likeID, likedPet);
+};
+const removeFromLikes = (userUID, ownerID, likeID, likedPet) => {
+  removePetFromLikes(userUID, ownerID, likeID, likedPet);
+};
+
+//  FOLLOWS   //
+const addToFollowed = (userUID, followUID, followedUser) => {
+  //ADD FOLLOWEDBY(USERUID) TO ALL OF THEIR POSTS
+  addUserToFollowed(userUID, followUID, followedUser);
+};
+const removeFromFollowed = (userUID, followUID, followedUser) => {
+  //REMOVE FOLLOWEDBY(USERUID) FROM ALL OF THEIR POSTS
+  removeUserFromFollowed(userUID, followUID, followedUser);
 };
 
 //  PETS    //

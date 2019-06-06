@@ -13,18 +13,20 @@ const Search = () => {
   const [age, setAge] = useState(0);
   const [pets, setPets] = useState([]);
 
-  const handleSubmit = async location => {
+  const handleSubmit = async (event, location) => {
+    event.preventDefault();
     let query;
     //get coords for place from api
-    const coords = await getCoords(location);
+    //const coords = await getCoords(location);
     //show loader before the window closes
-    const geohash = geohashEncode(coords.lat, coords.lon, 5);
-
+    //const geohash = geohashEncode(coords.lat, coords.lon, 5);
+    console.log(location);
     if (location) {
       query = firestore
         .collectionGroup("pets")
         .where("location", "==", location);
     }
+
     if (species) {
       query = firestore.collectionGroup("pets").where("species", "==", species);
     }

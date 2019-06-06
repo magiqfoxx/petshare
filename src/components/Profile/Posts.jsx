@@ -14,20 +14,15 @@ const Posts = props => {
         .collection("users")
         .doc(props.user.uid)
         .collection("posts");
-      const postQuery = postsRef.orderBy("date").limit(3);
-      postQuery
-        .get()
-        .then(snapshot => {
-          snapshot.forEach(doc => {
-            allPosts.push(doc.data());
-          });
-          setPosts(allPosts);
-        })
-        .catch(err => {
-          console.log("Error getting documents", err);
+      const postQuery = postsRef.orderBy("date", "desc").limit(3);
+      postQuery.onSnapshot(snapshot => {
+        snapshot.forEach(doc => {
+          allPosts.push(doc.data());
         });
+        setPosts(allPosts);
+      });
     }
-  }, props.user.uid);
+  }, []);
 
   const renderPosts = () => {
     if (posts) {
@@ -41,6 +36,8 @@ const Posts = props => {
             date={post.date}
             comments={post.comments}
             key={post.id}
+            id={post.id}
+            editable={true}
           />
         );
       });

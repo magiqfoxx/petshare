@@ -3,37 +3,43 @@ import React, { useState, useContext } from "react";
 import { UserContext } from "../../App";
 
 import FormError from "../Landing/FormError";
-import { addNewPost } from "../utilities/addToDatabase.js";
 import { uploadPostImg } from "../utilities/addToStorage";
-import { getDate } from "../utilities/utilities.js";
+import { getDate, addNewPost } from "../utilities/utilities.js";
 
 import pictureImg from "../../img/icons/gallery.svg";
+import checkImg from "../../img/icons/correct.svg";
 
 const NewPost = props => {
   const user = useContext(UserContext);
 
   const [postTitle, setPostTitle] = useState("");
   const [post, setPost] = useState("");
+  const [imageAdded, setImageAdded] = useState(false);
   const [picture, setPicture] = useState({});
-
   const handleSubmit = async event => {
     event.preventDefault();
-    if ((typeof picture == "object") & (picture.name.length > 0)) {
-      const date = getDate();
-      try {
-        const newPost = {
-          title: postTitle,
-          post,
-          date,
-          author: { name: user.name, id: user.uid }
-        };
-        const postID = await addNewPost(user.uid, newPost);
-        console.log(postID);
+
+    const date = getDate();
+    try {
+      const newPost = {
+        title: postTitle,
+        post,
+        date,
+        author: { name: user.name, id: user.uid },
+        followedBy: user.followedBy ? user.followedBy : []
+      };
+      const postID = await addNewPost(user.uid, newPost);
+
+      if (picture instanceof File) {
         uploadPostImg(user.uid, postID, picture);
-      } catch (error) {
-        console.log(error);
       }
+    } catch (error) {
+      console.log(error);
     }
+    setPostTitle("");
+    setPost("");
+    setPicture({});
+    props.close();
   };
   const setImage = event => {
     if (event.target.files) {
@@ -41,12 +47,14 @@ const NewPost = props => {
         setPicture("too large");
       } else {
         setPicture(event.target.files[0]);
+        setImageAdded(true);
       }
     }
   };
 
   return (
-    <div className="new-post small-slate">
+    <React.Fragment>
+      <h2 className="modal-slate__title">Add new post</h2>
       <form
         className="new-post"
         onSubmit={handleSubmit}
@@ -79,7 +87,21 @@ const NewPost = props => {
           htmlFor="picture"
           role="button"
         >
-          <img className="new-post__picture" src={pictureImg} alt="picture" />
+          {imageAdded ? (
+            <img
+              className="icon"
+              src={checkImg}
+              alt="check"
+              title="image added"
+            />
+          ) : (
+            <img
+              className="new-post__picture"
+              src={pictureImg}
+              alt="picture"
+              title="add image"
+            />
+          )}
         </label>
         <input
           className="new-post__picture-input"
@@ -89,12 +111,15 @@ const NewPost = props => {
           onChange={setImage}
           accept="image/png, image/jpeg"
         />
+        <p className="new-post__picture-text">
+          Please, choose a jpg or png file.
+        </p>
         {picture == "too large" ? (
           <FormError message="Image is too large" />
         ) : null}
-        <input className="input__button" type="submit" value="submit" />
+        <input className="button" type="submit" value="submit" />
       </form>
-    </div>
+    </React.Fragment>
   );
 };
 

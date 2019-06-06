@@ -52,7 +52,6 @@ const Profile = props => {
   const PetComponent = pet => {
     return (
       <Pet
-        //????????????????????
         edit={(e, petObj) => {
           setShowEditPet(petObj);
         }}
@@ -71,7 +70,7 @@ const Profile = props => {
   const addANewPet = (
     <div className="pet pet-slate" onClick={() => setShowEditNewPet(true)}>
       <img className="pet__image add-pet" src={addImg} alt="add" />
-      <span>Add a new pet!</span>
+      <span className="add-pet__text">Add a new pet!</span>
     </div>
   );
 
@@ -105,6 +104,7 @@ const Profile = props => {
           <h2 className="user-pets__title">Pets</h2>
           <div className="pets">{renderPets()}</div>
         </div>
+        <Posts user={user} />
         {showEditBio ? <EditBio close={() => setShowEditBio(false)} /> : null}
         {showEditPicture ? (
           <EditPicture close={() => setShowEditPicture(false)} />
@@ -118,7 +118,6 @@ const Profile = props => {
         {showEditPet ? (
           <EditPet close={() => setShowEditPet(false)} pet={showEditPet} />
         ) : null}
-        <Posts user={user} />
       </main>
     );
   };

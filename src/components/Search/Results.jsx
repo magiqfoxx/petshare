@@ -7,36 +7,40 @@ import Pet from "../Profile/Pet";
 
 const Results = props => {
   const [pets, setPets] = useState([]);
+  const [place, setPlace] = useState("nearby");
   const user = useContext(UserContext);
 
   useEffect(() => {
-    console.log(user);
-    if (user && user.coords) {
-      console.log(user);
-      const userGeohash = user.coords.geohash;
-      const geo = geohashGetNeighbours(userGeohash);
-      let geohashes = [...Object.values(geo)].sort();
-
-      firestore
-        .collectionGroup("pets")
-        .orderBy("geohash")
-        .startAt(geohashes[0])
-        //.endAt(geohashes[7])
-        .limit(3)
-        .get()
-        .then(snapshot => {
-          let responsePets = [];
-          snapshot.forEach(response => {
-            console.log(response.data());
-            responsePets.push(response.data());
+    if (props.pets.length < 1) {
+      if (user && user.coords) {
+        const userGeohash = user.coords.geohash;
+        //const geo = geohashGetNeighbours(userGeohash);
+        //i'm making the area much broader
+        const geo = geohashGetNeighbours(userGeohash.slice(0, 3));
+        let geohashes = [...Object.values(geo)].sort();
+        const startAt = geohashes[0];
+        const endAt = geohashes[7];
+        firestore
+          .collectionGroup("pets")
+          .orderBy("geohash")
+          .startAt(startAt)
+          .endAt(endAt)
+          //.limit(3)
+          .get()
+          .then(snapshot => {
+            let responsePets = [];
+            snapshot.forEach(response => {
+              responsePets.push(response.data());
+            });
+            setPets(responsePets);
           });
-          setPets(responsePets);
-        });
+      }
+    } else {
+      setPets(props.pets);
     }
-  }, user);
-  //CANNOT USE USER???
+  }, [user]);
+
   const renderPets = () => {
-    console.log(pets);
     return pets.map(pet => {
       return (
         <Pet
@@ -46,12 +50,19 @@ const Results = props => {
           species={pet.species}
           age={pet.age}
           description={pet.description}
-          id={pet.id}
+          uid={pet.id}
+          likedBy={pet.likedBy}
+          owner={pet.owner}
         />
       );
     });
   };
-  return <div className="search__results small-slate">{renderPets()}</div>;
+  return (
+    <div className="search__results small-slate">
+      <h2>Pets {place}...</h2>
+      <div className="results-grid">{renderPets()}</div>
+    </div>
+  );
 };
 
 export default Results;

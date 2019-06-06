@@ -1,12 +1,15 @@
 import { firestore } from "../firebase";
 
+//USER//
 export const addNewUserToDatabase = newUser => {
   firestore
     .collection("users")
     .doc(newUser.uid)
     .set(newUser, { merge: true });
 };
-export const addNewPost = async (userUID, newPost) => {
+
+//POSTS
+export const addNewPostToDataBase = async (userUID, newPost) => {
   const postsRef = firestore
     .collection("users")
     .doc(userUID)
@@ -18,6 +21,7 @@ export const addNewPost = async (userUID, newPost) => {
   return post.id;
 };
 
+//PETS//
 export const addNewPetToDataBase = async (userUID, newPet) => {
   const userRef = await firestore.collection("users").doc(userUID);
   return await userRef.collection("pets").add(newPet);

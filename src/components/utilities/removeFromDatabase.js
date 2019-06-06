@@ -1,5 +1,6 @@
 import firebase, { firestore } from "../firebase";
 
+//USER//
 export const removeUserFromDataBase = userUID => {
   firestore
     .collection("users")
@@ -18,7 +19,7 @@ export const removeAuthUser = () => {
       // An error happened.
     });
 };
-export const removeAllOfUsersPetsFromCollection = userUID => {
+export const removeAllOfUsersPetsFromDataBase = userUID => {
   firestore
     .collection("users")
     .doc(userUID)
@@ -31,7 +32,15 @@ export const removeAllOfUsersPetsFromCollection = userUID => {
     })
     .catch(error => console.log(error));
 };
-
+//POSTS//
+export const removePostFromDataBase = async (userUID, postID) => {
+  firestore
+    .collection("users")
+    .doc(userUID)
+    .collection("posts")
+    .doc(postID)
+    .delete();
+};
 //  PETS  //
 export const removePetFromDataBase = (userUID, petUID) => {
   firestore

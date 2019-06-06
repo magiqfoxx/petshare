@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import firebase from "../firebase";
 
 import FormError from "./FormError";
-import { addNewUserToDatabase } from "../utilities/addToDatabase";
+import { addNewUser } from "../utilities/utilities";
 
 const SignUp = props => {
   const [name, setName] = useState("");
@@ -25,15 +25,15 @@ const SignUp = props => {
         const newUser = {
           //only for email sign up!
           name: name,
-          email: response.user.email,
+          //email: response.user.email,
           uid: response.user.uid
         };
-        addNewUserToDatabase(newUser);
+        addNewUser(newUser);
         const user = firebase.auth().currentUser;
         user
           .sendEmailVerification()
           .then(function() {
-            // Email sent.
+            //Email was sent
           })
           .catch(function(error) {
             console.log(error);

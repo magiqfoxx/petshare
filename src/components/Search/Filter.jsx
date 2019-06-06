@@ -14,7 +14,7 @@ const Filter = props => {
         <img className="icon" src={filterImg} alt="filter" />
       </button>
       {filterExpanded ? (
-        <form className="filter__form" onSubmit={props.submit}>
+        <form className="filter__form" onSubmit={e => props.submit(e)}>
           <label className="filter__label" htmlFor="species">
             Species
           </label>

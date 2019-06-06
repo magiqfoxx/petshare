@@ -121,11 +121,17 @@
     }
     &__file {
       position: relative;
+      display: none;
       left: 2rem;
       border: none;
+      &--label {
+        margin: 0 auto;
+        margin-top: 1rem;
+        cursor: pointer;
+      }
     }
     &__text {
-      margin: 1rem;
+      margin-bottom: 1rem;
       text-align: center;
       font-size: 0.8rem;
       color: $primary-color;
@@ -247,4 +253,8 @@
       background-color: whitesmoke;
     }
   }
+}
+.new-post {
+  display: flex;
+  flex-direction: column;
 }

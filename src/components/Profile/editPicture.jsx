@@ -5,9 +5,13 @@ import FormError from "../Landing/FormError";
 import { uploadUserImg } from "../utilities/addToStorage";
 import quitImg from "../../img/icons/cancel.svg";
 
+import pictureImg from "../../img/icons/gallery.svg";
+import checkImg from "../../img/icons/correct.svg";
+
 const EditPicture = props => {
   const [image, setImage] = useState("");
   const [imageTooLarge, setImageTooLarge] = useState(false);
+  const [imageAdded, setImageAdded] = useState(false);
   const user = useContext(UserContext);
 
   const handleSubmit = async event => {
@@ -29,6 +33,7 @@ const EditPicture = props => {
         setImageTooLarge(true);
       } else {
         setImage(event.target.files[0]);
+        setImageAdded(true);
       }
     }
   };
@@ -44,11 +49,32 @@ const EditPicture = props => {
             <img src={quitImg} alt="quit" />
           </button>
           <h1 className="form__title">Select a picture</h1>
-
+          <label
+            className="form__file--label label"
+            htmlFor="picture"
+            role="button"
+          >
+            {imageAdded ? (
+              <img
+                className="icon"
+                src={checkImg}
+                alt="check"
+                title="image added"
+              />
+            ) : (
+              <img
+                className="new-post__picture"
+                src={pictureImg}
+                alt="picture"
+                title="add image"
+              />
+            )}
+          </label>
           <input
+            className="form__file"
             type="file"
-            name="pictureFile"
-            id="pictureFile"
+            name="picture"
+            id="picture"
             accept="image/png, image/jpeg"
             onChange={handleChange}
             required

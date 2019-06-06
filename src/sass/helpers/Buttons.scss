@@ -1,3 +1,30 @@
+//for Safari
+button {
+  padding: 0.5rem 1rem;
+  -webkit-appearance: none;
+}
+.button {
+  min-height: 2rem;
+  min-width: 5rem;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  border-radius: $border-radius;
+  background-color: $primary-color;
+  cursor: pointer;
+  &:hover {
+    background-color: $hot-pink;
+    color: white;
+    transition: background-color 1s;
+  }
+  &:active {
+    transform: translateX(3px) translateY(3px);
+  }
+}
 .edit {
   position: absolute;
   bottom: 5px;
@@ -17,7 +44,7 @@
 }
 .delete {
   @extend .edit;
-  top: 1rem;
+  top: 0.2rem;
   height: 1.5rem;
   &:hover {
     background-color: $primary-color;
@@ -55,10 +82,13 @@
 }
 .follow {
   @extend .like;
+  &:hover {
+    background-color: #ffe256;
+  }
 }
 .followed {
   @extend .like;
-  background-color: yellow;
+  background-color: #ffe256;
 }
 .icon--button {
   background-color: transparent;

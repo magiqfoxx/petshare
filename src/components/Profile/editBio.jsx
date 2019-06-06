@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../../App";
 
-import { updateUserInDataBase } from "../utilities/updateDatabase";
+import { updateUser } from "../utilities/utilities";
 import quitImg from "../../img/icons/cancel.svg";
 
 const EditBio = props => {
@@ -12,7 +12,7 @@ const EditBio = props => {
     event.preventDefault();
 
     try {
-      updateUserInDataBase(user.uid, { bio });
+      updateUser(user.uid, { bio });
     } catch (error) {
       console.log(error);
     }

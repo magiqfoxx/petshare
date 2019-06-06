@@ -3,12 +3,10 @@
   margin: 0.5rem;
   font-size: 0.7rem;
   line-height: 1rem;
-  padding: 1rem;
   &__bolded {
     background-color: $primary-color;
     color: whitesmoke;
-    margin: 0rem -1rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
     box-shadow: 1px 1px $primary-color;
     position: relative;
     .edit {
@@ -24,23 +22,25 @@
     object-fit: cover;
     object-position: center;
     cursor: pointer;
-    &:hover {
-      background-color: black;
-    }
   }
   &__name {
     font-size: 0.8rem;
     color: aliceblue;
   }
-  &__species {
-  }
-  &__age {
-  }
   &__description {
-    margin-top: 1rem;
+    padding: 0.5rem;
     font-size: 0.6rem;
   }
-}
-.add-pet {
-  cursor: pointer;
+  .add-pet {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    &__text {
+      margin: 1.5rem 0.5rem;
+      font-size: 1rem;
+      text-align: center;
+      color: #40535d;
+    }
+  }
 }

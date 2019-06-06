@@ -6,6 +6,7 @@ import { addNewPet } from "../utilities/utilities.js";
 
 import quitImg from "../../img/icons/cancel.svg";
 import pictureImg from "../../img/icons/gallery.svg";
+import checkImg from "../../img/icons/correct.svg";
 
 class EditNewPet extends Component {
   state = {
@@ -14,7 +15,8 @@ class EditNewPet extends Component {
     age: "",
     description: "",
     image: "",
-    imageTooLarge: false
+    imageTooLarge: false,
+    imageAdded: false
   };
 
   handleSubmit = async (event, user) => {
@@ -24,6 +26,8 @@ class EditNewPet extends Component {
       //validate that an image was selected
       if (this.state.image) {
         const newPet = {
+          owner: { id: user.uid, name: user.name },
+          location: user.location ? user.location : null,
           name: this.state.name,
           species: this.state.species,
           age: this.state.age,
@@ -48,6 +52,7 @@ class EditNewPet extends Component {
         this.setState({ imageTooLarge: true });
       } else {
         this.setState({ image: event.target.files[0] });
+        this.setState({ imageAdded: true });
       }
     }
   };
@@ -121,12 +126,32 @@ class EditNewPet extends Component {
                   onChange={this.handleChange}
                   value={this.state.description}
                 />
-                <img className="form__img" src={pictureImg} alt="add image" />
+                <label
+                  className="form__file--label label"
+                  htmlFor="picture"
+                  role="button"
+                >
+                  {this.state.imageAdded ? (
+                    <img
+                      className="icon"
+                      src={checkImg}
+                      alt="check"
+                      title="image added"
+                    />
+                  ) : (
+                    <img
+                      className="icon"
+                      src={pictureImg}
+                      alt="picture"
+                      title="add image"
+                    />
+                  )}
+                </label>
                 <input
                   className="form__file"
                   type="file"
-                  name="image"
-                  id="image"
+                  name="picture"
+                  id="picture"
                   accept="image/png, image/jpeg"
                   onChange={this.setImage}
                   required
@@ -135,7 +160,14 @@ class EditNewPet extends Component {
                   <FormError message="Image is too large" />
                 ) : null}
                 <p className="form__text">Please, choose a jpg or png file.</p>
-                <input className="input__button" type="submit" value="submit" />
+                <button
+                  className="button"
+                  role="submit"
+                  type="submit"
+                  value="submit"
+                >
+                  Submit
+                </button>
               </form>
             </div>
           </div>
