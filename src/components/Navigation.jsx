@@ -46,7 +46,7 @@ const Navigation = props => {
     />
   );
   const loggedOut = (
-    <NavLink to="./">
+    <NavLink to="/">
       <img className="nav__img" src={loginImg} alt="login" title="login" />
     </NavLink>
   );
@@ -58,7 +58,7 @@ const Navigation = props => {
       </div>
       <ul className="nav__ul">
         <li className="nav__ul__li">
-          <Link to="./search">
+          <Link to="/search">
             <img
               className="nav__img"
               src={searchImg}
@@ -70,7 +70,7 @@ const Navigation = props => {
         {context ? (
           <React.Fragment>
             <li className="nav__ul__li">
-              <Link to="./profile">
+              <Link to="/profile">
                 <img
                   className="nav__img"
                   src={profileImg}
@@ -80,7 +80,7 @@ const Navigation = props => {
               </Link>
             </li>
             <li className="nav__ul__li">
-              <Link to="./settings">
+              <Link to="/settings">
                 <img
                   className="nav__img"
                   src={settingsImg}

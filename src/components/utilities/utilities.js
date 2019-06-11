@@ -108,13 +108,13 @@ const removeFromLikes = (userUID, ownerID, likeID, likedPet) => {
 };
 
 //  FOLLOWS   //
-const addToFollowed = (userUID, followUID, followedUser) => {
-  //ADD FOLLOWEDBY(USERUID) TO ALL OF THEIR POSTS
-  addUserToFollowed(userUID, followUID, followedUser);
+const addToFollowed = (userUID, followedUser) => {
+  //Add a collection of followed with a new doc
+  addUserToFollowed(userUID, followedUser);
 };
-const removeFromFollowed = (userUID, followUID, followedUser) => {
-  //REMOVE FOLLOWEDBY(USERUID) FROM ALL OF THEIR POSTS
-  removeUserFromFollowed(userUID, followUID, followedUser);
+const removeFromFollowed = (userUID, followedUID, followedUser) => {
+  //Remove followed user doc by their id
+  removeUserFromFollowed(userUID, followedUID, followedUser);
 };
 
 //  PETS    //
