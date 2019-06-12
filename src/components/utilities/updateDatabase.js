@@ -43,33 +43,45 @@ export const removePetFromLikes = async (
 
 //  FOLLOWS   //
 export const addUserToFollowed = async (userUID, followedUID, followedUser) => {
-  const userRef = firestore
+  //FOR CLOUD FUNCTIONS
+  const CollectionUserRef = firestore
     .collection("users")
     .doc(userUID)
     .collection("follows");
-  userRef.doc(followedUID).set(followedUser);
-  /*await userRef.update({
+  CollectionUserRef.doc(followedUID).set(followedUser);
+
+  //FOR FASTER READING FROM USER DATABASE
+  const userRef = firestore.collection("users").doc(userUID);
+  userRef.update({
     follows: firebase.firestore.FieldValue.arrayUnion(followedUser)
   });
-  const followRef = firestore.collection("users").doc(followUID);
-  await followRef.update({
+  const followRef = firestore.collection("users").doc(followedUID);
+  followRef.update({
     followedBy: firebase.firestore.FieldValue.arrayUnion(userUID)
-  });*/
+  });
 };
-export const removeUserFromFollowed = async (userUID, followedUID) => {
-  const userRef = firestore
+export const removeUserFromFollowed = async (
+  userUID,
+  followedUID,
+  followedUser
+) => {
+  //FOR CLOUD FUNCTIONS
+  const CollectionUserRef = firestore
     .collection("users")
     .doc(userUID)
-    .collection("follows");
-  userRef.delete(followedUID);
-  /*const userRef = firestore.collection("users").doc(userUID);
-  await userRef.update({
+    .collection("follows")
+    .doc(followedUID);
+  CollectionUserRef.delete();
+
+  //FOR FASTER READING FROM USER DATABASE
+  const userRef = firestore.collection("users").doc(userUID);
+  userRef.update({
     follows: firebase.firestore.FieldValue.arrayRemove(followedUser)
   });
-  const followRef = firestore.collection("users").doc(followUID);
-  await followRef.update({
+  const followRef = firestore.collection("users").doc(followedUID);
+  followRef.update({
     followedBy: firebase.firestore.FieldValue.arrayRemove(userUID)
-  });*/
+  });
 };
 
 //    PETS    //

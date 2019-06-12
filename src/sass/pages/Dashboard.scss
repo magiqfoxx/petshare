@@ -1,12 +1,6 @@
 .dashboard {
-  display: grid;
-  grid-template-areas:
-    "posts posts add-new-post"
-    "posts posts favorites"
-    "posts posts follows"
-    "posts posts ."
-    "posts posts .";
-  grid-gap: 2rem;
+  display: flex;
+  flex-direction: column;
   padding: 1rem;
   background-color: white;
   .new-post {
@@ -58,5 +52,19 @@
       padding: 0.2rem 0.5rem;
       color: white;
     }
+  }
+  @media (min-width: 500px) {
+  }
+  @media (min-width: 750px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+      "posts posts add-new-post"
+      "posts posts favorites"
+      "posts posts follows"
+      "posts posts ."
+      "posts posts .";
+    grid-gap: 2rem;
+    padding: 1rem;
   }
 }

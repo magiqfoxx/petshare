@@ -40,7 +40,7 @@ const Post = props => {
           </button>
         ) : null}
         <h2 className="post__title">{props.title}</h2>
-        <span className="post__date">{formatTimestamp(props.date)}</span>
+        <p className="post__date">{formatTimestamp(props.date)}</p>
         {props.img ? (
           <img className="post__image" src={props.img} alt={props.title} />
         ) : null}

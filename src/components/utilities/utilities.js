@@ -108,9 +108,9 @@ const removeFromLikes = (userUID, ownerID, likeID, likedPet) => {
 };
 
 //  FOLLOWS   //
-const addToFollowed = (userUID, followedUser) => {
+const addToFollowed = (userUID, followedUID, followedUser) => {
   //Add a collection of followed with a new doc
-  addUserToFollowed(userUID, followedUser);
+  addUserToFollowed(userUID, followedUID, followedUser);
 };
 const removeFromFollowed = (userUID, followedUID, followedUser) => {
   //Remove followed user doc by their id

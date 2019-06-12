@@ -79,7 +79,7 @@ const UserProfile = props => {
   const renderContent = () => {
     if (pageUser && user) {
       return (
-        <main className="profile">
+        <main className="user-profile">
           <div className="user">
             <div className="user__image small-slate">
               <img src={pageUser.img} alt="user" />

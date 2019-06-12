@@ -57,6 +57,7 @@ button {
   width: 2rem;
   background-color: transparent;
   border: none;
+  padding: 0;
   cursor: pointer;
 }
 .settings__button {
@@ -95,4 +96,22 @@ button {
   border: none;
   display: inline;
   cursor: pointer;
+}
+.view {
+  padding: 0px;
+  position: absolute;
+  bottom: 1px;
+  left: 1px;
+  width: 2rem;
+  height: 1.8rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  &__img {
+    &:hover {
+      filter: invert(100%);
+    }
+  }
+}
+.location-icon {
 }

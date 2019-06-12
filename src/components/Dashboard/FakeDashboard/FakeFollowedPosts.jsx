@@ -1,18 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
-import Post from "./Post";
-import { UserContext } from "../../App";
+import Post from "../Post";
+import user from "./fakeData";
 
-import { firestore } from "../firebase";
+import { firestore } from "../../firebase";
 
 const FollowedPosts = () => {
   const [posts, setPosts] = useState([]);
-  const user = useContext(UserContext);
 
   useEffect(() => {
     const query = firestore
       .collectionGroup("posts")
       //.where("author.id", "==", user.uid) //where user.followsById includes author.id
-      .where("followedBy", "array-contains", user.uid)
+      //where("followedBy", "array-contains", user.uid)
       .orderBy("date", "desc")
       .limit(3);
     let results = [];

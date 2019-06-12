@@ -8,10 +8,10 @@ const WhySignUp = () => {
       <ul className="whySignUp__list">
         <li className="whySignUp__list-item">Create profile page</li>
         <li className="whySignUp__list-item">Add pets to favorites</li>
-        <p>
-          The password is processed by google only Your email is only used for
-          logging in and doesn't exist anywhere in the database. You can delete
-          your account and all the data you provided will be removed
+        <p class="small-text">
+          Password is processed by google. Your email is only used for logging
+          in and doesn't exist anywhere in the database. You can delete your
+          account and all the data related to your account will be removed
           immediately.
         </p>
       </ul>
@@ -27,7 +27,7 @@ const WhySignUp = () => {
         </a>
       </p>
       <button className="button">
-        <Link to="./search">Continue without logging in</Link>
+        <Link to="/fake">Continue without logging in</Link>
       </button>
     </div>
   );

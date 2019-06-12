@@ -1,0 +1,33 @@
+.modal-slate {
+  justify-content: space-between;
+  align-items: center;
+  min-height: 30vh;
+  .modal__title {
+    min-height: 3rem;
+    width: 100%;
+    padding: 1rem;
+    background-color: $primary-color;
+    color: white;
+  }
+  .modal__button {
+    margin: 2rem;
+    min-height: 2rem;
+    min-width: 5rem;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    border-radius: $border-radius;
+    background-color: $primary-color;
+    cursor: pointer;
+    &:hover {
+      background-color: $hot-pink;
+      color: white;
+      transition: background-color 1s;
+    }
+    &:active {
+      transform: translateX(3px) translateY(3px);
+    }
+  }
+}

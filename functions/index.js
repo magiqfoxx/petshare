@@ -9,18 +9,18 @@ exports.newFollow = functions.firestore
     const newFollower = snap.data(); //holds uid, name and img
     const uid = newFollower.uid;
 
-    var ref = admin.database().ref(`users/${context.params.followedUID}/posts`);
-    return ref
-      .once("value")
-      .then(snapshot => {
-        return snapshot.forEach(post => {
-          return post.ref.update({
-            followedBy: [context.params.userUID] //...followedBy,
-          });
+    return admin
+      .firestore()
+      .collection("users")
+      .doc(context.params.followedUID)
+      .collection("posts")
+      .get()
+      .then(posts => {
+        return posts.forEach(post => {
+          return post.ref.update("followedBy", [context.params.userUID]);
         });
       })
       .catch(error => console.log(error));
-    //admin.database().ref(`users/${context.params.followedUID}`).once('value').then(function(snapshot){....
   });
 
 exports.deleteFollow = functions.firestore
@@ -28,14 +28,17 @@ exports.deleteFollow = functions.firestore
   .onDelete((snap, context) => {
     //context.params stores userUID and followedUID
 
-    var ref = admin.database().ref(`users/${context.params.followedUID}/posts`);
-    return ref
-      .once("value")
-      .then(snapshot => {
-        return snapshot.forEach(post => {
-          return post.ref.update({
-            followedBy: followedBy.splice(followedBy.indexOf(usrUID), 1)
-          });
+    return admin
+      .firestore()
+      .collection("users")
+      .doc(context.params.followedUID)
+      .collection("posts")
+      .get()
+      .then(posts => {
+        return posts.forEach(post => {
+          let oldArr = post.data().ref.followedBy;
+          let newArr = oldArr.splice(oldArr.indexOf(context.params.userUID), 1);
+          return post.ref.update("followedBy", newArr);
         });
       })
       .catch(error => console.log(error));

@@ -11,6 +11,7 @@ import Profile from "./components/Profile/Profile";
 import UserProfile from "./components/Profile/UserProfile";
 import Settings from "./components/Settings/Settings";
 import Footer from "./components/Footer";
+import FakeDashboard from "./components/Dashboard/FakeDashboard/FakeDashboard";
 
 export const UserContext = React.createContext();
 
@@ -82,6 +83,7 @@ function App() {
         <Route path="/" exact component={Landing} />
         <Route path="/about/" component={About} />
         <Route path="/search/" component={Search} />
+        <Route path="/fake" component={FakeDashboard} />
         <Route path="/profile/" component={Profile} />
         <Route path="/settings/" component={Settings} />
         <Route path="/user/:id" component={UserProfile} />

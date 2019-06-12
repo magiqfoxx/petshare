@@ -1,15 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
-import { UserContext } from "../../App";
+import user from "./fakeData";
 
-import DashboardSlate from "./DashboardSlate";
+import DashboardSlate from "../DashboardSlate";
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
-  const user = useContext(UserContext);
 
   useEffect(() => {
     setFavorites(user.likes);
   }, [user]);
+
   const renderFavorites = () => {
     if (favorites) {
       return favorites.map(pet => {

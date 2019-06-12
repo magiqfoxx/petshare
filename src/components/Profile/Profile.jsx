@@ -87,7 +87,7 @@ const Profile = props => {
 
             <span className="user__location">{renderLocation()}</span>
             <img
-              className="icon"
+              className="icon location-icon"
               src={locationImg}
               alt="location"
               onClick={() => setShowEditLocation(true)}

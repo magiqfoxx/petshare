@@ -13,3 +13,41 @@
     padding: 3rem;
   }
 }
+
+.user-profile {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 2rem;
+  padding: 1rem;
+  background-color: white;
+  @media (min-width: 500px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+      "posts posts user"
+      "posts posts pets"
+      "posts posts ."
+      "posts posts ."
+      "posts posts .";
+  }
+  @media (min-width: 750px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+      "pets pets pets"
+      "posts posts user"
+      "posts posts ."
+      "posts posts ."
+      "posts posts .";
+
+    padding: 3rem;
+  }
+  .user {
+    grid-area: user;
+  }
+  .user-pets {
+    grid-area: pets;
+  }
+  .posts {
+    grid-area: posts;
+  }
+}
