@@ -12,10 +12,13 @@ Adding others' pets to favorites.
 Following other users - their newest posts are displayed on your dashboard.
 
 // TECH
+
 I'm using newest features in React like hooks, context API and portals. 
 Context API means I can avoid using a state managment library like Redux.
 
 /*To do:
+
 Implement comments,
+
 dynamically load more posts and comments 
 */
