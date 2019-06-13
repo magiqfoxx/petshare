@@ -9,20 +9,20 @@ const Posts = props => {
 
   useEffect(() => {
     if (props.user.uid) {
-      let allPosts = [];
       const postsRef = firestore
         .collection("users")
         .doc(props.user.uid)
         .collection("posts");
       const postQuery = postsRef.orderBy("date", "desc").limit(3);
       postQuery.onSnapshot(snapshot => {
+        let allPosts = [];
         snapshot.forEach(doc => {
           allPosts.push(doc.data());
         });
         setPosts(allPosts);
       });
     }
-  }, []);
+  }, [props.user.uid]);
 
   const renderPosts = () => {
     if (posts) {

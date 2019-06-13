@@ -55,10 +55,6 @@ export const addUserToFollowed = async (userUID, followedUID, followedUser) => {
   userRef.update({
     follows: firebase.firestore.FieldValue.arrayUnion(followedUser)
   });
-  const followRef = firestore.collection("users").doc(followedUID);
-  followRef.update({
-    followedBy: firebase.firestore.FieldValue.arrayUnion(userUID)
-  });
 };
 export const removeUserFromFollowed = async (
   userUID,
@@ -78,10 +74,11 @@ export const removeUserFromFollowed = async (
   userRef.update({
     follows: firebase.firestore.FieldValue.arrayRemove(followedUser)
   });
+  /* moved to cloud functions
   const followRef = firestore.collection("users").doc(followedUID);
   followRef.update({
     followedBy: firebase.firestore.FieldValue.arrayRemove(userUID)
-  });
+  });*/
 };
 
 //    PETS    //

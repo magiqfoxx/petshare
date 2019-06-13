@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import SearchBar from "./SearchBar";
 import Results from "./Results";
 import Filter from "./Filter";
-import { getCoords } from "../utilities/geoLocation";
-import { geohashEncode } from "../utilities/geoHash";
 
 import { firestore } from "../firebase";
 
@@ -12,25 +10,26 @@ const Search = () => {
   const [species, setSpecies] = useState("");
   const [age, setAge] = useState(0);
   const [pets, setPets] = useState([]);
+  const [location, setLocation] = useState("");
 
   const handleSubmit = async (event, location) => {
     event.preventDefault();
     let query;
+    if (location) {
+      setLocation(location);
+    }
     //get coords for place from api
     //const coords = await getCoords(location);
     //show loader before the window closes
     //const geohash = geohashEncode(coords.lat, coords.lon, 5);
-    console.log(location);
     if (location) {
       query = firestore
         .collectionGroup("pets")
         .where("location", "==", location);
-    }
-
-    if (species) {
+    } else if (species) {
       query = firestore.collectionGroup("pets").where("species", "==", species);
-    }
-    if (age) {
+    } else if (age) {
+      console.log("age");
       query = firestore.collectionGroup("pets").where("age", "==", age);
     }
     let results = [];
@@ -39,6 +38,7 @@ const Search = () => {
         results.push(doc.data());
       });
       if (results.length > 0) {
+        console.log(results);
         setPets(results);
       } else {
         setPets("Sorry. No pets matched your query");
@@ -56,7 +56,7 @@ const Search = () => {
         setAge={value => setAge(value)}
         submit={handleSubmit}
       />
-      <Results pets={pets} />
+      <Results pets={pets} place={location} />
     </main>
   );
 };

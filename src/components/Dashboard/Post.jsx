@@ -54,7 +54,7 @@ const Post = props => {
         <Modal
           component={
             <div className="background" onClick={() => setEnlargeImg(false)}>
-              <img className="modal__image" src={props.img} />
+              <img className="modal__image" src={props.img} alt={props.title} />
             </div>
           }
         />

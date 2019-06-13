@@ -68,7 +68,11 @@ const Profile = props => {
   };
 
   const addANewPet = (
-    <div className="pet pet-slate" onClick={() => setShowEditNewPet(true)}>
+    <div
+      className="pet pet-slate"
+      onClick={() => setShowEditNewPet(true)}
+      key="000"
+    >
       <img className="pet__image add-pet" src={addImg} alt="add" />
       <span className="add-pet__text">Add a new pet!</span>
     </div>

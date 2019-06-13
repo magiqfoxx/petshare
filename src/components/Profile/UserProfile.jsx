@@ -40,7 +40,7 @@ const UserProfile = props => {
       });
       setPets(allPets);
     });
-  }, []);
+  }, [props.match.params.id]);
 
   const addToFollowed = () => {
     if (user.uid !== pageUser.uid) {
@@ -55,7 +55,12 @@ const UserProfile = props => {
   const removeFromFollowed = () => {
     //RELIES ON THE FACT THAT THE PAGE USER OBJECT WILL NOT CHANGE
     //TERRIBLE IDEA
-    removeUserFromFollowed(user.uid, pageUser.uid, pageUser);
+    const userToUnFollow = {
+      uid: pageUser.uid,
+      name: pageUser.name,
+      img: pageUser.img
+    };
+    removeUserFromFollowed(user.uid, pageUser.uid, userToUnFollow);
   };
   const renderPets = () => {
     if (pets.length > 0) {

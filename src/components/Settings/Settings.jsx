@@ -9,14 +9,10 @@ import passwordImg from "../../img/icons/unlock.svg";
 import deleteImg from "../../img/icons/garbage.svg";
 import { deleteUser } from "../utilities/utilities";
 
-import Modal from "../Modals/Modal";
-import OKPopup from "../Modals/OKPopup";
-
 const Settings = props => {
   const [showEditEmail, setShowEditEmail] = useState(false);
   const [showEditPassword, setShowEditPassword] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [showConfirmation, setShowConfirmation] = useState(false);
   const user = useContext(UserContext);
 
   const deleteAccount = () => {

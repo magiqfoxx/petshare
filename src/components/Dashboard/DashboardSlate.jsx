@@ -23,7 +23,11 @@ const DashboardSlate = props => {
         <Modal
           component={
             <div className="background" onClick={() => setEnlargeImg(false)}>
-              <img className="modal__image" src={props.image} />
+              <img
+                className="modal__image"
+                src={props.image}
+                alt={props.name}
+              />
             </div>
           }
         />

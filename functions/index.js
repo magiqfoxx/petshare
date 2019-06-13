@@ -9,6 +9,20 @@ exports.newFollow = functions.firestore
     const newFollower = snap.data(); //holds uid, name and img
     const uid = newFollower.uid;
 
+    //for the array field in user doc
+    admin
+      .firestore()
+      .collection("users")
+      .doc(context.params.followedUID)
+      .get()
+      .then(doc => {
+        let oldArr = doc.data().followedBy;
+        let newArr = [...oldArr, context.params.userUID];
+        return doc.ref.update("followedBy", newArr);
+      })
+      .catch(error => console.log(error));
+
+    //for the collection
     return admin
       .firestore()
       .collection("users")
@@ -17,7 +31,11 @@ exports.newFollow = functions.firestore
       .get()
       .then(posts => {
         return posts.forEach(post => {
-          return post.ref.update("followedBy", [context.params.userUID]);
+          let oldArr = post.data().followedBy;
+          return post.ref.update("followedBy", [
+            ...oldArr,
+            context.params.userUID
+          ]);
         });
       })
       .catch(error => console.log(error));
@@ -28,6 +46,21 @@ exports.deleteFollow = functions.firestore
   .onDelete((snap, context) => {
     //context.params stores userUID and followedUID
 
+    //for the array field in user doc
+    admin
+      .firestore()
+      .collection("users")
+      .doc(context.params.followedUID)
+      .get()
+      .then(doc => {
+        let oldArr = doc.data().followedBy;
+        let newArr = oldArr.splice(oldArr.indexOf(context.params.userUID), 1);
+        //HOW DOES THIS WORK????
+        return doc.ref.update("followedBy", oldArr);
+      })
+      .catch(error => console.log(error));
+
+    //for the collection
     return admin
       .firestore()
       .collection("users")
@@ -36,9 +69,10 @@ exports.deleteFollow = functions.firestore
       .get()
       .then(posts => {
         return posts.forEach(post => {
-          let oldArr = post.data().ref.followedBy;
+          let oldArr = post.data().followedBy;
           let newArr = oldArr.splice(oldArr.indexOf(context.params.userUID), 1);
-          return post.ref.update("followedBy", newArr);
+          //HOW DOES THIS WORK????
+          return post.ref.update("followedBy", oldArr);
         });
       })
       .catch(error => console.log(error));

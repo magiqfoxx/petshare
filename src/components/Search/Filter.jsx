@@ -19,11 +19,14 @@ const Filter = props => {
             Species
           </label>
           <input
-            className="filter__input"
+            className="search__input"
             list="speciess"
             id="species"
             name="species"
-            onChange={e => props.setSpecies(e.target.value)}
+            onChange={e => {
+              props.setSpecies(e.target.value);
+              props.setAge("");
+            }}
           />
 
           <datalist id="speciess">
@@ -37,16 +40,18 @@ const Filter = props => {
             Age
           </label>
           <input
-            className="filter__input"
-            type="range"
+            className="search__input "
+            type="text"
             name="age"
             id="age"
-            min="0"
-            max="15"
             value={props.age}
-            onChange={e => props.setAge(e.target.value)}
+            onChange={e => {
+              props.setAge(e.target.value);
+              props.setSpecies("");
+            }}
           />
-          <input className="input__button" type="reset" value="Reset" />
+          <input className="search__button" type="reset" value="Reset" />
+          <input className="search__button" type="submit" value="Submit" />
         </form>
       ) : null}
     </div>

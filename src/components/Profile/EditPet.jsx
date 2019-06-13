@@ -6,7 +6,6 @@ import FormError from "../Landing/FormError";
 import { dataChanged, updatePetData } from "../utilities/utilities";
 import { uploadPetImg } from "../utilities/addToStorage";
 import quitImg from "../../img/icons/cancel.svg";
-import pictureImg from "../../img/icons/gallery.svg";
 import editImg from "../../img/icons/edit.svg";
 
 class EditNewPet extends Component {

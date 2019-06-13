@@ -2,7 +2,6 @@ import { uploadPetImg } from "./addToStorage";
 import {
   addNewUserToDatabase,
   addNewPetToDataBase,
-  addNewPetToCollection,
   addNewPostToDataBase
 } from "./addToDatabase";
 import {
@@ -11,22 +10,16 @@ import {
   removePetFromLikes,
   addUserToFollowed,
   removeUserFromFollowed,
-  updatePetInDataBase,
-  updatePetInCollection
+  updatePetInDataBase
 } from "./updateDatabase";
 import {
   removeUserFromDataBase,
   removeAuthUser,
   removeAllOfUsersPetsFromDataBase,
   removePostFromDataBase,
-  removePetFromDataBase,
-  removePetFromCollection
+  removePetFromDataBase
 } from "./removeFromDatabase";
-import {
-  removeUserImg,
-  removeUserStorage,
-  removePetImg
-} from "./removeFromStorage";
+import { removeUserStorage, removePetImg } from "./removeFromStorage";
 
 //  DATE  //
 

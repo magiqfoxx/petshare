@@ -1,7 +1,5 @@
 import React from "react";
 
-import quitImg from "../../img/icons/cancel.svg";
-
 const Ok = props => {
   return (
     <React.Fragment>

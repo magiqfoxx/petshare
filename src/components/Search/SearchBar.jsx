@@ -4,7 +4,7 @@ class SearchBar extends Component {
   state = { location: "" };
   handleSubmit = event => {
     event.preventDefault();
-    this.props.handleSubmit(this.state.location);
+    this.props.handleSubmit(event, this.state.location);
   };
   handleChange = event => {
     this.setState({ location: event.target.value });
@@ -26,6 +26,10 @@ class SearchBar extends Component {
           />
           <input className="input__button" type="submit" value="submit" />
         </form>
+        <p className="small-text">
+          Try bigger cities like "Warsaw" or "Poznań". Due to no 3rd party API
+          support, only literal values will be found.
+        </p>
       </div>
     );
   }

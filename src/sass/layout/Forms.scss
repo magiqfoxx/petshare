@@ -65,6 +65,7 @@
   }
   .input__button {
     height: 2rem;
+    min-height: 2rem;
     border: none;
     font-size: 1rem;
     font-weight: 900;
@@ -236,6 +237,8 @@
   margin: 1rem;
   &__button {
     width: 2rem;
+    height: 2rem;
+    padding: 0rem;
     margin-right: 1rem;
     background-color: white;
     border-radius: $border-radius;

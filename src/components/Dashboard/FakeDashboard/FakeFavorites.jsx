@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import user from "./fakeData";
 
 import DashboardSlate from "../DashboardSlate";
@@ -8,7 +8,7 @@ const Favorites = () => {
 
   useEffect(() => {
     setFavorites(user.likes);
-  }, [user]);
+  }, []);
 
   const renderFavorites = () => {
     if (favorites) {

@@ -8,7 +8,7 @@ const WhySignUp = () => {
       <ul className="whySignUp__list">
         <li className="whySignUp__list-item">Create profile page</li>
         <li className="whySignUp__list-item">Add pets to favorites</li>
-        <p class="small-text">
+        <p className="small-text">
           Password is processed by google. Your email is only used for logging
           in and doesn't exist anywhere in the database. You can delete your
           account and all the data related to your account will be removed
@@ -22,6 +22,7 @@ const WhySignUp = () => {
           href="http://creativecommons.org/licenses/by/3.0/"
           title="Creative Commons BY 3.0"
           target="_blank"
+          rel="noopener noreferrer"
         >
           CC 3.0 BY
         </a>

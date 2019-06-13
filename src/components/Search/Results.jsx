@@ -8,14 +8,15 @@ import Pet from "../Profile/Pet";
 const Results = props => {
   const [pets, setPets] = useState([]);
   const [place, setPlace] = useState("nearby");
+  const [message, setMessage] = useState("");
   const user = useContext(UserContext);
 
   useEffect(() => {
+    console.log("render");
     if (props.pets.length < 1) {
       if (user && user.coords) {
         const userGeohash = user.coords.geohash;
-        //const geo = geohashGetNeighbours(userGeohash);
-        //i'm making the area much broader
+        //i'm making the area very broad so that something always shows up
         const geo = geohashGetNeighbours(userGeohash.slice(0, 3));
         let geohashes = [...Object.values(geo)].sort();
         const startAt = geohashes[0];
@@ -25,7 +26,7 @@ const Results = props => {
           .orderBy("geohash")
           .startAt(startAt)
           .endAt(endAt)
-          //.limit(3)
+          .limit(9)
           .get()
           .then(snapshot => {
             let responsePets = [];
@@ -33,12 +34,19 @@ const Results = props => {
               responsePets.push(response.data());
             });
             setPets(responsePets);
+            setMessage("");
           });
+      } else {
+        setMessage("You have to provide your geolocation");
       }
     } else {
+      if (props.place) {
+        setPlace(props.place);
+      }
       setPets(props.pets);
+      setMessage("");
     }
-  }, [user]);
+  }, [user, props.pets, props.place]);
 
   const renderPets = () => {
     return pets.map(pet => {
@@ -60,7 +68,10 @@ const Results = props => {
   return (
     <div className="search__results small-slate">
       <h2>Pets {place}...</h2>
-      <div className="results-grid">{renderPets()}</div>
+      <div className="results-grid">
+        {renderPets()}
+        <p className="small-text">{message}</p>
+      </div>
     </div>
   );
 };

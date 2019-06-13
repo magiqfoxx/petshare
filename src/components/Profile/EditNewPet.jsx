@@ -160,12 +160,7 @@ class EditNewPet extends Component {
                   <FormError message="Image is too large" />
                 ) : null}
                 <p className="form__text">Please, choose a jpg or png file.</p>
-                <button
-                  className="button"
-                  role="submit"
-                  type="submit"
-                  value="submit"
-                >
+                <button className="button" type="submit" value="submit">
                   Submit
                 </button>
               </form>

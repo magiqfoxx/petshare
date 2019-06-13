@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import user from "./fakeData";
 
 import DashboardSlate from "../DashboardSlate";
@@ -8,7 +8,7 @@ const Followed = () => {
 
   useEffect(() => {
     setFollows(user.follows);
-  }, [user]);
+  }, []);
 
   const renderFollowed = () => {
     if (follows) {
