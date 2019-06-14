@@ -29,7 +29,6 @@ const Search = () => {
     } else if (species) {
       query = firestore.collectionGroup("pets").where("species", "==", species);
     } else if (age) {
-      console.log("age");
       query = firestore.collectionGroup("pets").where("age", "==", age);
     }
     let results = [];
@@ -38,7 +37,6 @@ const Search = () => {
         results.push(doc.data());
       });
       if (results.length > 0) {
-        console.log(results);
         setPets(results);
       } else {
         setPets("Sorry. No pets matched your query");

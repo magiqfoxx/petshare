@@ -12,8 +12,7 @@ const Results = props => {
   const user = useContext(UserContext);
 
   useEffect(() => {
-    console.log("render");
-    if (props.pets.length < 1) {
+    if (props.pets.length < 1 && pets.length < 1) {
       if (user && user.coords) {
         const userGeohash = user.coords.geohash;
         //i'm making the area very broad so that something always shows up
@@ -33,6 +32,7 @@ const Results = props => {
             snapshot.forEach(response => {
               responsePets.push(response.data());
             });
+
             setPets(responsePets);
             setMessage("");
           });
@@ -46,7 +46,7 @@ const Results = props => {
       setPets(props.pets);
       setMessage("");
     }
-  }, [user, props.pets, props.place]);
+  }, [user, props.pets, props.place, pets.length]);
 
   const renderPets = () => {
     return pets.map(pet => {

@@ -16,6 +16,7 @@ const NewPost = props => {
   const [post, setPost] = useState("");
   const [imageAdded, setImageAdded] = useState(false);
   const [picture, setPicture] = useState({});
+
   const handleSubmit = async event => {
     event.preventDefault();
 

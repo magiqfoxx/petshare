@@ -2,6 +2,8 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 admin.initializeApp(functions.config().firebase);
 
+/*Writes user into an array at users/id/followedBy
+which is then used for querrying*/
 exports.newFollow = functions.firestore
   .document("users/{userUID}/follows/{followedUID}")
   .onCreate((snap, context) => {
@@ -76,4 +78,80 @@ exports.deleteFollow = functions.firestore
         });
       })
       .catch(error => console.log(error));
+  });
+
+/* On comment creating: Adds the last three comments to the /users/is/posts/postID
+For less querrying */
+exports.newComment = functions.firestore
+  .document("users/{userUID}/posts/{postID}/comments/{commentID}")
+  .onCreate((snap, context) => {
+    //Get last 3 comments
+    return (
+      admin
+        .firestore()
+        .collection("users")
+        .doc(context.params.userUID)
+        .collection("posts")
+        .doc(context.params.postID)
+        .collection("comments")
+        .orderBy("date", "desc")
+        .limit(3)
+        .get()
+        //set lastComments in post doc
+        .then(docs => {
+          let lastComments = [];
+          docs.forEach(doc => {
+            lastComments.push(doc.data());
+          });
+          return admin
+            .firestore()
+            .collection("users")
+            .doc(context.params.userUID)
+            .collection("posts")
+            .doc(context.params.postID)
+            .get()
+            .then(doc => {
+              return doc.ref.update("lastComments", lastComments);
+            })
+            .catch(error => console.log(error));
+        })
+        .catch(error => console.log(error))
+    );
+  });
+
+exports.commentDeleted = functions.firestore
+  .document("users/{userUID}/posts/{postID}/comments/{commentID}")
+  .onDelete((snap, context) => {
+    //Get last 3 comments
+    return (
+      admin
+        .firestore()
+        .collection("users")
+        .doc(context.params.userUID)
+        .collection("posts")
+        .doc(context.params.postID)
+        .collection("comments")
+        .orderBy("date", "desc")
+        .limit(3)
+        .get()
+        //set lastComments in post doc
+        .then(docs => {
+          let lastComments = [];
+          docs.forEach(doc => {
+            lastComments.push(doc.data());
+          });
+          return admin
+            .firestore()
+            .collection("users")
+            .doc(context.params.userUID)
+            .collection("posts")
+            .doc(context.params.postID)
+            .get()
+            .then(doc => {
+              return doc.ref.update("lastComments", lastComments);
+            })
+            .catch(error => console.log(error));
+        })
+        .catch(error => console.log(error))
+    );
   });

@@ -2,7 +2,8 @@ import { uploadPetImg } from "./addToStorage";
 import {
   addNewUserToDatabase,
   addNewPetToDataBase,
-  addNewPostToDataBase
+  addNewPostToDataBase,
+  addNewCommentToDataBase
 } from "./addToDatabase";
 import {
   updateUserInDataBase,
@@ -17,6 +18,7 @@ import {
   removeAuthUser,
   removeAllOfUsersPetsFromDataBase,
   removePostFromDataBase,
+  removeCommentFromDataBase,
   removePetFromDataBase
 } from "./removeFromDatabase";
 import { removeUserStorage, removePetImg } from "./removeFromStorage";
@@ -41,6 +43,7 @@ const months = [
   "December"
 ];
 export const formatTimestamp = timestamp => {
+  //CHECK IF TODAY OR YESTERDAY
   const date = new Date(timestamp);
   let minutes = date.getMinutes();
   minutes = (minutes < 10 ? "0" : "") + minutes;
@@ -90,6 +93,14 @@ export const addNewPost = (userUID, newPost) => {
 };
 export const removePost = (userUID, postID) => {
   removePostFromDataBase(userUID, postID);
+};
+
+//  COMMENTS  //
+export const addNewComment = (postAuthorUID, postID, newComment) => {
+  return addNewCommentToDataBase(postAuthorUID, postID, newComment);
+};
+export const removeComment = (postAuthorUID, postID, commentID) => {
+  removeCommentFromDataBase(postAuthorUID, postID, commentID);
 };
 
 //  LIKES  //

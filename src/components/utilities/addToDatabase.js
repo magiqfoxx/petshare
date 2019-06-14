@@ -21,6 +21,25 @@ export const addNewPostToDataBase = async (userUID, newPost) => {
   return post.id;
 };
 
+//COMMENTS
+export const addNewCommentToDataBase = async (
+  postAuthorUID,
+  postID,
+  newComment
+) => {
+  const commentsRef = firestore
+    .collection("users")
+    .doc(postAuthorUID)
+    .collection("posts")
+    .doc(postID)
+    .collection("comments");
+
+  const comment = await commentsRef.add(newComment);
+  commentsRef.doc(comment.id).update({ id: comment.id });
+
+  return comment.id;
+};
+
 //PETS//
 export const addNewPetToDataBase = async (userUID, newPet) => {
   const userRef = await firestore.collection("users").doc(userUID);

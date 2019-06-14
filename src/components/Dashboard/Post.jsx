@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { UserContext } from "../../App";
 
-import Comment from "./Comment";
+import Comments from "./Comments";
 import Modal from "../Modals/Modal";
 import ConfirmationPopUp from "../Modals/ConfirmationPopup";
 
@@ -16,19 +16,6 @@ const Post = props => {
 
   const deletePost = () => {
     removePost(user.uid, props.id);
-  };
-  const renderComments = () => {
-    if (props.comments) {
-      props.comments.map(comment => {
-        return (
-          <Comment
-            author={comment.author}
-            text={comment.author}
-            date={comment.date}
-          />
-        );
-      });
-    }
   };
 
   return (
@@ -48,8 +35,15 @@ const Post = props => {
         <p className="post__author">
           <Link to={`/user/${props.author.id}`}>- {props.author.name}</Link>
         </p>
+        <div className="comments">
+          <Comments
+            postID={props.id}
+            authorID={props.author.id}
+            lastComments={props.lastComments}
+          />
+        </div>
       </div>
-      <div className="comments">{renderComments()}</div>
+
       {enlargeImg && (
         <Modal
           component={

@@ -19,10 +19,11 @@ const Posts = props => {
         snapshot.forEach(doc => {
           allPosts.push(doc.data());
         });
+
         setPosts(allPosts);
       });
     }
-  }, [props.user.uid]);
+  }, [props]);
 
   const renderPosts = () => {
     if (posts) {
@@ -38,6 +39,7 @@ const Posts = props => {
             key={post.id}
             id={post.id}
             editable={true}
+            lastComments={post.lastComments}
           />
         );
       });

@@ -41,6 +41,22 @@ export const removePostFromDataBase = async (userUID, postID) => {
     .doc(postID)
     .delete();
 };
+
+//COMMENTS
+export const removeCommentFromDataBase = async (
+  postAuthorUID,
+  postID,
+  commentID
+) => {
+  firestore
+    .collection("users")
+    .doc(postAuthorUID)
+    .collection("posts")
+    .doc(postID)
+    .collection("comments")
+    .doc(commentID)
+    .delete();
+};
 //  PETS  //
 export const removePetFromDataBase = (userUID, petUID) => {
   firestore

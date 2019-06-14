@@ -32,6 +32,18 @@
   border-radius: $border-radius;
   overflow: hidden;
 }
+.comment-slate {
+  position: relative;
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  padding-bottom: 0.2rem;
+  box-shadow: 3px 3px 5px #d8ccbb;
+  background-color: #f7f4f4; //#efecec;
+  border-radius: $border-radius;
+  overflow: hidden;
+  font-size: 0.7rem;
+  max-width: 30rem;
+}
 .user-slate {
   height: 10rem;
   box-shadow: 3px 3px 5px #d6d5d5;

@@ -11,13 +11,13 @@ const FollowedPosts = () => {
   useEffect(() => {
     const query = firestore
       .collectionGroup("posts")
-      //.where("author.id", "==", user.uid) //where user.followsById includes author.id
       .where("followedBy", "array-contains", user.uid)
       .orderBy("date", "desc")
       .limit(3);
-    let results = [];
-    query.get().then(function(querySnapshot) {
-      querySnapshot.forEach(doc => {
+
+    query.onSnapshot(snapshot => {
+      let results = [];
+      snapshot.forEach(doc => {
         results.push(doc.data());
       });
       if (results.length > 0) {
@@ -43,6 +43,7 @@ const FollowedPosts = () => {
             key={post.id}
             id={post.id}
             editable={false}
+            lastComments={post.lastComments}
           />
         );
       });
