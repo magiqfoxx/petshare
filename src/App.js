@@ -11,7 +11,8 @@ import Profile from "./components/Profile/Profile";
 import UserProfile from "./components/Profile/UserProfile";
 import Settings from "./components/Settings/Settings";
 import Footer from "./components/Footer";
-import FakeDashboard from "./components/Dashboard/FakeDashboard/FakeDashboard";
+
+import fakeUser from "./components/Dashboard/FakeDashboard/fakeData";
 
 export const UserContext = React.createContext();
 
@@ -76,14 +77,20 @@ function App() {
       });
     });
   };
+  const logInAsAnonymous = () => {
+    setLoggedUser(fakeUser);
+  };
   return (
     <UserContext.Provider value={loggedUser}>
       <div className="app">
         <Navigation />
-        <Route path="/" exact component={Landing} />
+        <Route
+          path="/"
+          exact
+          render={() => <Landing logInAsAnonymous={logInAsAnonymous} />}
+        />
         <Route path="/about/" component={About} />
         <Route path="/search/" component={Search} />
-        <Route path="/fake" component={FakeDashboard} />
         <Route path="/profile/" component={Profile} />
         <Route path="/settings/" component={Settings} />
         <Route path="/user/:id" component={UserProfile} />

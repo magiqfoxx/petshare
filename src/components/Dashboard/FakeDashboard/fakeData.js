@@ -50,7 +50,12 @@ export default {
       }
     }
   ],
-  location: `Who knows`,
-  name: `A name`,
-  uid: 0
+  location: `Wrocław`,
+  coords: {
+    geohash: "u3h4e",
+    lat: "17.0385376",
+    lon: "51.1078852"
+  },
+  name: `The Unnamed`,
+  uid: "LqCKIMuFfhO3Wdm7aS2CZk2Yx623"
 };

@@ -6,7 +6,7 @@ import SignIn from "./SignIn";
 import WhySignUp from "./WhySignUp";
 import Dashboard from "../Dashboard/Dashboard";
 
-const Landing = () => {
+const Landing = props => {
   const user = useContext(UserContext);
   //const [user, setUser] = useState(null);
   const [signIn, setSignIn] = useState(false);
@@ -20,7 +20,11 @@ const Landing = () => {
             <SignUp signIn={() => setSignIn(true)} />
           </div>
 
-          {signIn ? <SignIn /> : <WhySignUp />}
+          {signIn ? (
+            <SignIn />
+          ) : (
+            <WhySignUp logInAsAnonymous={props.logInAsAnonymous} />
+          )}
         </div>
       )}
     </main>

@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { formatTimestamp } from "../utilities/utilities.js";
 import { UserContext } from "../../App";
 import { removeComment } from "../utilities/utilities.js";
@@ -23,7 +24,10 @@ const Comment = props => {
       ) : null}
       <p className="comment__text">{props.comment}</p>
 
-      <span className="comment__author"> - {props.author.name}</span>
+      <span className="comment__author">
+        {" "}
+        - <Link to={`/user/${props.author.id}`}>{props.author.name}</Link>
+      </span>
       <span className="comment__date">({formatTimestamp(props.date)})</span>
       {showDeleteMessage && (
         <Modal

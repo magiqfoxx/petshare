@@ -6,7 +6,7 @@ import DashboardSlate from "./DashboardSlate";
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
   const user = useContext(UserContext);
-
+  console.log(user);
   useEffect(() => {
     setFavorites(user.likes);
   }, [user]);

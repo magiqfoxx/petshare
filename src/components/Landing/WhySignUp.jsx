@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-const WhySignUp = () => {
+const WhySignUp = props => {
   return (
     <div className="landing__whySignUp">
       <h2 className="whySignUp__title">Signing up lets you:</h2>
@@ -27,8 +27,8 @@ const WhySignUp = () => {
           CC 3.0 BY
         </a>
       </p>
-      <button className="button">
-        <Link to="/fake">Continue without logging in</Link>
+      <button className="button" onClick={props.logInAsAnonymous}>
+        <Link to="/">See a sample</Link>
       </button>
     </div>
   );
