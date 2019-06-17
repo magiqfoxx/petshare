@@ -15,8 +15,8 @@ const Comments = props => {
   }, [props.lastComments]);
 
   const renderComments = () => {
-    if (comments) {
-      return comments.map(comment => {
+    if (props.comments) {
+      return props.comments.map(comment => {
         return (
           <Comment
             comment={comment.comment}
@@ -66,6 +66,11 @@ const Comments = props => {
         <input className="comments__button" type="submit" value="Submit" />
       </form>
       <div className="comment-list">{renderComments()}</div>
+      {props.moreComments ? (
+        <button className="comments__button" onClick={props.loadMoreComments}>
+          Load more
+        </button>
+      ) : null}
     </React.Fragment>
   );
 };

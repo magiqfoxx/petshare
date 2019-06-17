@@ -44,6 +44,7 @@ const FollowedPosts = () => {
             id={post.id}
             editable={false}
             lastComments={post.lastComments}
+            dateOfLastComment={post.dateOfLastComment}
           />
         );
       });

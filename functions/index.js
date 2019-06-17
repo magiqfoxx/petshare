@@ -103,6 +103,7 @@ exports.newComment = functions.firestore
           docs.forEach(doc => {
             lastComments.push(doc.data());
           });
+
           return admin
             .firestore()
             .collection("users")
@@ -111,7 +112,10 @@ exports.newComment = functions.firestore
             .doc(context.params.postID)
             .get()
             .then(doc => {
-              return doc.ref.update("lastComments", lastComments);
+              return doc.ref.update({
+                lastComments: lastComments,
+                dateOfLastComment: lastComments[lastComments.length - 1].date
+              });
             })
             .catch(error => console.log(error));
         })
@@ -148,7 +152,10 @@ exports.commentDeleted = functions.firestore
             .doc(context.params.postID)
             .get()
             .then(doc => {
-              return doc.ref.update("lastComments", lastComments);
+              return doc.ref.update({
+                lastComments: lastComments,
+                dateOfLastComment: lastComments[lastComments.length - 1].date
+              });
             })
             .catch(error => console.log(error));
         })

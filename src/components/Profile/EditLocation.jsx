@@ -22,6 +22,7 @@ const EditLocation = props => {
       location.coords.longitude,
       5
     );
+    console.log(geohash);
     const newCoords = {
       lat: location.coords.latitude,
       lon: location.coords.longitude

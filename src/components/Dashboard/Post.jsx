@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { UserContext } from "../../App";
+import { firestore } from "../firebase";
 
 import Comments from "./Comments";
 import Modal from "../Modals/Modal";
@@ -10,9 +11,32 @@ import { formatTimestamp, removePost } from "../utilities/utilities";
 import deleteImg from "../../img/icons/garbage.svg";
 
 const Post = props => {
+  const [comments, setComments] = useState(props.lastComments);
+  const [moreComments, setMoreComments] = useState(true);
   const user = useContext(UserContext);
+
   const [showDeleteMessage, setShowDeleteMessage] = useState(false);
   const [enlargeImg, setEnlargeImg] = useState(false);
+
+  const loadMoreComments = () => {
+    const query = firestore
+      .collection("users")
+      .doc(props.author.id)
+      .collection("posts")
+      .doc(props.id)
+      .collection("comments")
+      .orderBy("date", "desc")
+      .startAfter(props.dateOfLastComment)
+      .limit(3)
+      .get()
+      .then(results => {
+        if (results.length > 0) {
+          setComments(results.data());
+        } else {
+          setMoreComments(false);
+        }
+      });
+  };
 
   const deletePost = () => {
     removePost(user.uid, props.id);
@@ -39,7 +63,10 @@ const Post = props => {
           <Comments
             postID={props.id}
             authorID={props.author.id}
+            comments={comments}
             lastComments={props.lastComments}
+            loadMoreComments={loadMoreComments}
+            moreComments={props.lastComments.length < 2 ? false : moreComments}
           />
         </div>
       </div>
