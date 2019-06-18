@@ -13,25 +13,36 @@ import deleteImg from "../../img/icons/garbage.svg";
 const Post = props => {
   const [comments, setComments] = useState(props.lastComments);
   const [moreComments, setMoreComments] = useState(true);
+  const [dateOfOldestComment, setDateOfOldestComment] = useState(
+    props.dateOfOldestComment
+  );
   const user = useContext(UserContext);
 
   const [showDeleteMessage, setShowDeleteMessage] = useState(false);
   const [enlargeImg, setEnlargeImg] = useState(false);
 
   const loadMoreComments = () => {
-    const query = firestore
+    firestore
       .collection("users")
       .doc(props.author.id)
       .collection("posts")
       .doc(props.id)
       .collection("comments")
       .orderBy("date", "desc")
-      .startAfter(props.dateOfLastComment)
+      .startAfter(dateOfOldestComment)
       .limit(3)
       .get()
       .then(results => {
-        if (results.length > 0) {
-          setComments(results.data());
+        let newComments = [];
+        results.forEach(result => {
+          newComments.push(result.data());
+        });
+        if (newComments.length > 0) {
+          setComments([...comments, ...newComments]);
+          setDateOfOldestComment(newComments[newComments.length - 1].date);
+          if (newComments.length < 3) {
+            setMoreComments(false);
+          }
         } else {
           setMoreComments(false);
         }
@@ -41,7 +52,6 @@ const Post = props => {
   const deletePost = () => {
     removePost(user.uid, props.id);
   };
-
   return (
     <React.Fragment>
       <div className="post post-slate">
@@ -66,7 +76,11 @@ const Post = props => {
             comments={comments}
             lastComments={props.lastComments}
             loadMoreComments={loadMoreComments}
-            moreComments={props.lastComments.length < 2 ? false : moreComments}
+            moreComments={
+              props.lastComments && props.lastComments.length < 2
+                ? false
+                : moreComments
+            }
           />
         </div>
       </div>

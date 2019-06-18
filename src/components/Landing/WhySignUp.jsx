@@ -6,12 +6,14 @@ const WhySignUp = props => {
     <div className="landing__whySignUp">
       <h2 className="whySignUp__title">Signing up lets you:</h2>
       <ul className="whySignUp__list">
-        <li className="whySignUp__list-item">Create profile page</li>
+        <li className="whySignUp__list-item">Create a profile page</li>
+        <li className="whySignUp__list-item">Write posts and comments</li>
+        <li className="whySignUp__list-item">Follow other pet lovers</li>
         <li className="whySignUp__list-item">Add pets to favorites</li>
         <p className="small-text">
-          Password is processed by google. Your email is only used for logging
-          in and doesn't exist anywhere in the database. You can delete your
-          account and all the data related to your account will be removed
+          Authorisation is done through google. Your email is only used for
+          logging in and doesn't exist anywhere in the database. You can delete
+          your account and all the data related to your account will be removed
           immediately.
         </p>
       </ul>

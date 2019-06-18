@@ -26,7 +26,7 @@ const Navigation = props => {
       .then(function() {
         // Sign-out successful.
         setTimeout(() => {
-          props.history.push("./");
+          props.history.push("/");
         }, 2000);
       })
       .catch(function(error) {

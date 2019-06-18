@@ -27,8 +27,8 @@ class SearchBar extends Component {
           <input className="input__button" type="submit" value="submit" />
         </form>
         <p className="small-text">
-          Try bigger cities like "Warsaw" or "Poznań". Due to no 3rd party API
-          support, only literal values will be found.
+          Try bigger cities like "Warsaw" or "Poznań". Due to the lack of
+          support for 3rd party APIs, only literal values will be found.
         </p>
       </div>
     );

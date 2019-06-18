@@ -14,7 +14,7 @@ const Results = props => {
   useEffect(() => {
     if (props.pets.length < 1 && pets.length < 1) {
       if (user && user.coords) {
-        const userGeohash = user.coords.geohash;
+        const userGeohash = user.geohash;
         //i'm making the area very broad so that something always shows up
         const geo = geohashGetNeighbours(userGeohash.slice(0, 3));
         let geohashes = [...Object.values(geo)].sort();

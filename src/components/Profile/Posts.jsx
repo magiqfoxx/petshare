@@ -40,6 +40,7 @@ const Posts = props => {
             id={post.id}
             editable={true}
             lastComments={post.lastComments}
+            dateOfOldestComment={post.dateOfLastComment}
           />
         );
       });
