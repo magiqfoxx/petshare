@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import firebase, { firestore } from "./components/firebase";
 
+import SeeOnGithub from "./components/SeeOnGithub";
 import Navigation from "./components/Navigation";
 import Landing from "./components/Landing/Landing";
 import About from "./components/About";
@@ -83,6 +84,7 @@ function App() {
   return (
     <UserContext.Provider value={loggedUser}>
       <div className="app">
+        <SeeOnGithub />
         <Navigation />
         <Route
           path="/"

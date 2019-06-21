@@ -1,6 +1,7 @@
 .landing__whySignUp {
+  font-size: 0.7rem;
   position: relative;
-  min-width: 10rem;
+  min-width: 15rem;
   max-width: 80vw;
   width: 40vw;
   min-height: 23rem;
@@ -20,7 +21,7 @@
   line-height: 3rem;
   .whySignUp {
     &__title {
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
     &__list {
       &-item {
@@ -29,7 +30,7 @@
     }
   }
   .small-text {
-    font-size: 0.8rem;
+    font-size: 0.6rem;
     line-height: 1rem;
   }
 }

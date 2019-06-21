@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { UserContext } from "../../App";
 import { firestore } from "../firebase";
@@ -13,13 +13,15 @@ import deleteImg from "../../img/icons/garbage.svg";
 const Post = props => {
   const [comments, setComments] = useState(props.lastComments);
   const [moreComments, setMoreComments] = useState(true);
-  const [dateOfOldestComment, setDateOfOldestComment] = useState(
-    props.dateOfOldestComment
-  );
+  const [dateOfOldestComment, setDateOfOldestComment] = useState(0);
   const user = useContext(UserContext);
 
   const [showDeleteMessage, setShowDeleteMessage] = useState(false);
   const [enlargeImg, setEnlargeImg] = useState(false);
+
+  useEffect(() => {
+    setDateOfOldestComment(props.dateOfOldestComment);
+  }, [props.dateOfOldestComment]);
 
   const loadMoreComments = () => {
     firestore
@@ -49,6 +51,18 @@ const Post = props => {
       });
   };
 
+  const checkIfMoreComments = () => {
+    if (
+      !props.lastComments ||
+      !comments ||
+      props.lastComments.length < 3 ||
+      comments.length < 3
+    ) {
+      return false;
+    } else {
+      return moreComments;
+    }
+  };
   const deletePost = () => {
     removePost(user.uid, props.id);
   };
@@ -76,11 +90,7 @@ const Post = props => {
             comments={comments}
             lastComments={props.lastComments}
             loadMoreComments={loadMoreComments}
-            moreComments={
-              props.lastComments && props.lastComments.length < 2
-                ? false
-                : moreComments
-            }
+            moreComments={checkIfMoreComments()}
           />
         </div>
       </div>

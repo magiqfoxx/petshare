@@ -12,7 +12,8 @@
     .form {
       box-shadow: none;
       flex-direction: row;
-      min-width: 600px;
+      flex-wrap: wrap;
+      justify-content: center;
       justify-content: space-between;
       label {
         font-size: 1.2rem;
